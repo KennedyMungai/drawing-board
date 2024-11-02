@@ -1,3 +1,5 @@
+import Editor from "@/features/editor/components/editor";
+
 type Props = {
   params: {
     projectId: string;
@@ -7,7 +9,7 @@ type Props = {
 const ProjectPage = async ({ params }: Props) => {
   const { projectId } = await params;
 
-  return <div>{projectId}</div>;
+  return <Editor />;
 };
 
 export default ProjectPage;

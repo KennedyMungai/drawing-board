@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { fabric } from "fabric";
 
 export const useEditor = () => {
   const init = useCallback(
@@ -6,7 +7,7 @@ export const useEditor = () => {
       initialCanvas,
       initialContainer,
     }: {
-      initialCanvas: unknown;
+      initialCanvas: fabric.Canvas;
       initialContainer: HTMLDivElement;
     }) => console.log("Initializing editor"),
     [],

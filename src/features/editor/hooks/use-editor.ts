@@ -1,5 +1,16 @@
+import { useCallback } from "react";
+
 export const useEditor = () => {
-  const init = () => console.log("Initializing editor");
+  const init = useCallback(
+    ({
+      initialCanvas,
+      initialContainer,
+    }: {
+      initialCanvas: unknown;
+      initialContainer: HTMLDivElement;
+    }) => console.log("Initializing editor"),
+    [],
+  );
 
   return { init };
 };

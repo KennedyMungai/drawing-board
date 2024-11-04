@@ -3,6 +3,7 @@ import {
   BuildEditorProps,
   CIRCLE_OPTIONS,
   Editor,
+  RECTANGLE_OPTIONS,
 } from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
@@ -30,6 +31,11 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
   return {
     addCircle: () => {
       const object = new fabric.Circle({ ...CIRCLE_OPTIONS });
+
+      addToCanvas(object);
+    },
+    addSoftRectangle: () => {
+      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 10, ry: 10 });
 
       addToCanvas(object);
     },

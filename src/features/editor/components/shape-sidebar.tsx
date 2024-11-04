@@ -1,6 +1,7 @@
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
 import { ActiveTool } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
+import ToolSidebarClose from "./tool-sidebar-close";
 
 type Props = {
   activeTool: ActiveTool;
@@ -8,6 +9,8 @@ type Props = {
 };
 
 const ShapeSidebar = ({ activeTool, onChangeActiveTool }: Props) => {
+  const onClose = () => onChangeActiveTool("select");
+
   return (
     <aside
       className={cn(
@@ -20,6 +23,7 @@ const ShapeSidebar = ({ activeTool, onChangeActiveTool }: Props) => {
         description="Add shapes to your canvas"
       />
       Shapes Sidebar
+      <ToolSidebarClose onClick={onClose} />
     </aside>
   );
 };

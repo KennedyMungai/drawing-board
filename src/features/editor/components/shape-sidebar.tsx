@@ -1,3 +1,4 @@
+import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
 import { ActiveTool } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +15,10 @@ const ShapeSidebar = ({ activeTool, onChangeActiveTool }: Props) => {
         activeTool === "shapes" ? "visible" : "hidden",
       )}
     >
+      <ToolSidebarHeader
+        title="Shapes"
+        description="Add shapes to your canvas"
+      />
       Shapes Sidebar
     </aside>
   );

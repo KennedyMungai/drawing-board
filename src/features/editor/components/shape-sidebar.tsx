@@ -11,9 +11,10 @@ import ToolSidebarClose from "./tool-sidebar-close";
 type Props = {
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
+  editor: unknown;
 };
 
-const ShapeSidebar = ({ activeTool, onChangeActiveTool }: Props) => {
+const ShapeSidebar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
   const onClose = () => onChangeActiveTool("select");
 
   return (
@@ -29,7 +30,7 @@ const ShapeSidebar = ({ activeTool, onChangeActiveTool }: Props) => {
       />
       <ScrollArea>
         <div className="grid grid-cols-3 gap-4 p-4">
-          <ShapeTool onClick={() => {}} icon={FaCircle} />
+          <ShapeTool onClick={() => editor?.addCircle()} icon={FaCircle} />
           <ShapeTool onClick={() => {}} icon={FaSquare} />
           <ShapeTool onClick={() => {}} icon={FaSquareFull} />
           <ShapeTool onClick={() => {}} icon={IoTriangle} />

@@ -1,6 +1,14 @@
 import { useAutoResize } from "@/features/editor/hooks/use-auto-resize";
 import { fabric } from "fabric";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+
+const buildEditor = () => {
+  return {
+    addCircle: () => {
+      console.log("Adding a circle");
+    },
+  };
+};
 
 export const useEditor = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
@@ -10,6 +18,12 @@ export const useEditor = () => {
     canvas,
     container,
   });
+
+  const editor = useMemo(() => {
+    if (canvas) return buildEditor();
+
+    return undefined;
+  }, [canvas]);
 
   const init = useCallback(
     ({
@@ -63,5 +77,5 @@ export const useEditor = () => {
     [],
   );
 
-  return { init };
+  return { init, editor };
 };

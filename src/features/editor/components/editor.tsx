@@ -11,7 +11,7 @@ import { fabric } from "fabric";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const Editor = () => {
-  const { init } = useEditor();
+  const { init, editor } = useEditor();
 
   const canvasRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,6 +57,7 @@ const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <ShapeSidebar
+          editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />

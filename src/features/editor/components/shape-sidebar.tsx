@@ -1,7 +1,7 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ShapeTool from "@/features/editor/components/shape-tool";
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
-import { ActiveTool } from "@/features/editor/types";
+import { ActiveTool, Editor } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
 import { FaCircle, FaSquare, FaSquareFull } from "react-icons/fa";
 import { FaDiamond } from "react-icons/fa6";
@@ -11,7 +11,7 @@ import ToolSidebarClose from "./tool-sidebar-close";
 type Props = {
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
-  editor: unknown;
+  editor: Editor | undefined;
 };
 
 const ShapeSidebar = ({ activeTool, onChangeActiveTool, editor }: Props) => {

@@ -1,18 +1,16 @@
 import { useAutoResize } from "@/features/editor/hooks/use-auto-resize";
-import { BuildEditorProps, Editor } from "@/features/editor/types";
+import {
+  BuildEditorProps,
+  CIRCLE_OPTIONS,
+  Editor,
+} from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
 
 const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
   return {
     addCircle: () => {
-      const object = new fabric.Circle({
-        radius: 150,
-        height: 100,
-        width: 100,
-        fill: "#000",
-        stroke: "#000",
-      });
+      const object = new fabric.Circle({ ...CIRCLE_OPTIONS });
 
       canvas.add(object);
       canvas.setActiveObject(object);

@@ -24,6 +24,8 @@ export type BuildEditorProps = {
 export type Editor = {
   addCircle: () => void;
   addSoftRectangle: () => void;
+  addRectangle: () => void;
+  addTriangle: () => void;
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";
@@ -42,6 +44,17 @@ export const CIRCLE_OPTIONS = {
 };
 
 export const RECTANGLE_OPTIONS = {
+  left: 100,
+  top: 100,
+  fill: FILL_COLOR,
+  stroke: STROKE_COLOR,
+  stroke_width: STROKE_WIDTH,
+  width: 400,
+  height: 400,
+  angle: 0,
+};
+
+export const TRIANGLE_OPTIONS = {
   left: 100,
   top: 100,
   fill: FILL_COLOR,

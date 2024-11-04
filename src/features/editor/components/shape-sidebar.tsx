@@ -35,8 +35,11 @@ const ShapeSidebar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
             onClick={() => editor?.addSoftRectangle()}
             icon={FaSquare}
           />
-          <ShapeTool onClick={() => {}} icon={FaSquareFull} />
-          <ShapeTool onClick={() => {}} icon={IoTriangle} />
+          <ShapeTool
+            onClick={() => editor?.addRectangle()}
+            icon={FaSquareFull}
+          />
+          <ShapeTool onClick={() => editor?.addTriangle()} icon={IoTriangle} />
           <ShapeTool
             onClick={() => {}}
             icon={IoTriangle}

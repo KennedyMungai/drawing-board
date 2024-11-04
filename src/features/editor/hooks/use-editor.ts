@@ -4,6 +4,7 @@ import {
   CIRCLE_OPTIONS,
   Editor,
   RECTANGLE_OPTIONS,
+  TRIANGLE_OPTIONS,
 } from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
@@ -31,6 +32,26 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
   return {
     addCircle: () => {
       const object = new fabric.Circle({ ...CIRCLE_OPTIONS });
+
+      addToCanvas(object);
+    },
+    addSoftRectangle: () => {
+      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 50, ry: 50 });
+
+      addToCanvas(object);
+    },
+    addRectangle: () => {
+      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS });
+
+      addToCanvas(object);
+    },
+    addTriangle: () => {
+      const object = new fabric.Triangle({ ...TRIANGLE_OPTIONS });
+
+      addToCanvas(object);
+    },
+    addSoftRectangle: () => {
+      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 50, ry: 50 });
 
       addToCanvas(object);
     },

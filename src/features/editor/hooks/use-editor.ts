@@ -50,13 +50,13 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
 
       addToCanvas(object);
     },
-    addSoftRectangle: () => {
-      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 50, ry: 50 });
+    addInverseTriangle: () => {
+      const object = new fabric.Triangle({ ...TRIANGLE_OPTIONS, angle: 180 });
 
       addToCanvas(object);
     },
     addSoftRectangle: () => {
-      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 50, ry: 50 });
+      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS });
 
       addToCanvas(object);
     },

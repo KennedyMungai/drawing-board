@@ -41,7 +41,7 @@ const ShapeSidebar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
           />
           <ShapeTool onClick={() => editor?.addTriangle()} icon={IoTriangle} />
           <ShapeTool
-            onClick={() => {}}
+            onClick={() => editor?.addInverseTriangle()}
             icon={IoTriangle}
             iconClassName="rotate-180"
           />

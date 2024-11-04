@@ -26,6 +26,7 @@ export type Editor = {
   addSoftRectangle: () => void;
   addRectangle: () => void;
   addTriangle: () => void;
+  addInverseTriangle: () => void;
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";

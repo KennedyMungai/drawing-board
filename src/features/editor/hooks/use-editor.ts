@@ -8,12 +8,30 @@ import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
 
 const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
+  const getWorkspace = () =>
+    canvas.getObjects().find((object) => object.name === "clip");
+
+  const center = (object: fabric.Object) => {
+    const workspace = getWorkspace();
+    const center = workspace?.getCenterPoint();
+
+    if (!center) return;
+
+    // @ts-expect-error _centerObject has no type definitions
+    canvas._centerObject(object, center);
+  };
+
+  const addToCanvas = (object: fabric.Object) => {
+    center(object);
+    canvas.add(object);
+    canvas.setActiveObject(object);
+  };
+
   return {
     addCircle: () => {
       const object = new fabric.Circle({ ...CIRCLE_OPTIONS });
 
-      canvas.add(object);
-      canvas.setActiveObject(object);
+      addToCanvas(object);
     },
   };
 };
@@ -73,14 +91,6 @@ export const useEditor = () => {
 
       setCanvas(initialCanvas);
       setContainer(initialContainer);
-
-      const test = new fabric.Rect({
-        height: 100,
-        width: 100,
-        fill: "black",
-      });
-
-      initialCanvas.add(test).centerObject(test);
     },
     [],
   );

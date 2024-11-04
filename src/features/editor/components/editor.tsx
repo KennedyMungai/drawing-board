@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from "@/features/editor/components/footer";
 import Navbar from "@/features/editor/components/navbar";
 import Sidebar from "@/features/editor/components/sidebar";
 import Toolbar from "@/features/editor/components/toolbar";
@@ -29,9 +30,13 @@ const Editor = () => {
         <Sidebar />
         <main className="relative flex flex-1 flex-col overflow-auto bg-muted">
           <Toolbar />
-          <div ref={containerRef} className="h-full flex-1 bg-muted">
+          <div
+            ref={containerRef}
+            className="h-[calc(100%-124px)] flex-1 bg-muted"
+          >
             <canvas ref={canvasRef} />
           </div>
+          <Footer />
         </main>
       </div>
     </div>

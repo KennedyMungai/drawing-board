@@ -35,7 +35,7 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
       addToCanvas(object);
     },
     addSoftRectangle: () => {
-      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 10, ry: 10 });
+      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 50, ry: 50 });
 
       addToCanvas(object);
     },

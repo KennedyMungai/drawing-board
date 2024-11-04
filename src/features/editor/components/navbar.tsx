@@ -1,5 +1,6 @@
 "use client";
 
+import Hint from "@/components/hint";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -40,9 +41,11 @@ const Navbar = () => {
         </DropdownMenu>
         <Separator orientation="vertical" className="mx-2" />
         {/* TODO: Add functionality and dynamic class */}
-        <Button variant={"ghost"} size="icon" onClick={() => {}} className="">
-          <MousePointerClickIcon className="size-4" />
-        </Button>
+        <Hint label="Select" side={"bottom"} sideOffset={10}>
+          <Button variant={"ghost"} size="icon" onClick={() => {}} className="">
+            <MousePointerClickIcon className="size-4" />
+          </Button>
+        </Hint>
       </div>
     </nav>
   );

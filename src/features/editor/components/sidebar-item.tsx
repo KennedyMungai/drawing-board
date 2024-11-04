@@ -13,6 +13,7 @@ const SidebarItem = ({ icon: Icon, label, onClick, isActive }: Props) => {
   return (
     <Button
       onClick={onClick}
+      variant={"ghost"}
       className={cn(
         "flex aspect-video size-full flex-col rounded-none p-3 py-4",
         isActive && "bg-muted text-primary",

@@ -1,7 +1,16 @@
+import { useAutoResize } from "@/features/editor/hooks/use-auto-resize";
 import { fabric } from "fabric";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 export const useEditor = () => {
+  const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
+
+  useAutoResize({
+    canvas,
+    container,
+  });
+
   const init = useCallback(
     ({
       initialCanvas,
@@ -10,35 +19,46 @@ export const useEditor = () => {
       initialCanvas: fabric.Canvas;
       initialContainer: HTMLDivElement;
     }) => {
-        fabric.Object.prototype.set({
-          cornerColor: "#FFF",
-          cornerStyle: "circle",
-          borderColor: "#3B82F6",
-          borderScaleFactor: 1.5,
-          transparentCorners: false,
-          borderOpacityWhenMoving: 1,
-          cornerStrokeColor: "#3B82F6",
-        });
+      fabric.Object.prototype.set({
+        cornerColor: "#FFF",
+        cornerStyle: "circle",
+        borderColor: "#3B82F6",
+        borderScaleFactor: 1.5,
+        transparentCorners: false,
+        borderOpacityWhenMoving: 1,
+        cornerStrokeColor: "#3B82F6",
+      });
 
-        const initialWorkspace = new fabric.Rect({
-          width: 900,
-          height: 1200,
-          name: "clip",
-          fill: "white",
-          selectable: false,
-          hasControls: false,
-          shadow: new fabric.Shadow({
-            color: "rgba(0,0,0,0.8)",
-            blur: 5,
-          }),
-        });
+      const initialWorkspace = new fabric.Rect({
+        width: 900,
+        height: 1200,
+        name: "clip",
+        fill: "white",
+        selectable: false,
+        hasControls: false,
+        shadow: new fabric.Shadow({
+          color: "rgba(0,0,0,0.8)",
+          blur: 5,
+        }),
+      });
 
-        initialCanvas.setWidth(initialContainer.offsetWidth);
-        initialCanvas.setHeight(initialContainer.offsetHeight);
+      initialCanvas.setWidth(initialContainer.offsetWidth);
+      initialCanvas.setHeight(initialContainer.offsetHeight);
 
-        initialCanvas.add(initialWorkspace);
-        initialCanvas.centerObject(initialWorkspace);
-        initialCanvas.clipPath = initialWorkspace; 
+      initialCanvas.add(initialWorkspace);
+      initialCanvas.centerObject(initialWorkspace);
+      initialCanvas.clipPath = initialWorkspace;
+
+      setCanvas(initialCanvas);
+      setContainer(initialContainer);
+
+      const test = new fabric.Rect({
+        height: 100,
+        width: 100,
+        fill: "black",
+      });
+
+      initialCanvas.add(test).centerObject(test);
     },
     [],
   );

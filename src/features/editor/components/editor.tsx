@@ -21,6 +21,10 @@ const Editor = () => {
     });
 
     init({ initialCanvas: canvas, initialContainer: containerRef.current! });
+
+    return () => {
+      canvas.dispose();
+    };
   }, [init]);
 
   return (

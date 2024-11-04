@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import Logo from "@/features/editor/components/logo";
+import { ActiveTool } from "@/features/editor/types";
+import { cn } from "@/lib/utils";
 import {
   ChevronDownIcon,
   DownloadIcon,
@@ -20,7 +22,12 @@ import {
 import { BsCloudCheck } from "react-icons/bs";
 import { CiFileOn } from "react-icons/ci";
 
-const Navbar = () => {
+type Props = {
+  activeTool: ActiveTool;
+  onChangeActiveTool: (tool: ActiveTool) => void;
+};
+
+const Navbar = ({ activeTool, onChangeActiveTool }: Props) => {
   return (
     <nav className="flex h-[68px] w-full items-center gap-x-8 border-b p-4 lg:pl-[34px]">
       <Logo />
@@ -47,9 +54,13 @@ const Navbar = () => {
           </DropdownMenuContent>
         </DropdownMenu>
         <Separator orientation="vertical" className="mx-2" />
-        {/* TODO: Add functionality and dynamic class */}
         <Hint label="Select" side={"bottom"} sideOffset={10}>
-          <Button variant={"ghost"} size="icon" onClick={() => {}} className="">
+          <Button
+            variant={"ghost"}
+            size="icon"
+            onClick={() => onChangeActiveTool("select")}
+            className={cn(activeTool === "select" && "bg-gray-100")}
+          >
             <MousePointerClickIcon className="size-4" />
           </Button>
         </Hint>

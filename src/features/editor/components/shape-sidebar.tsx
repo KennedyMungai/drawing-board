@@ -1,4 +1,5 @@
 import { ActiveTool } from "@/features/editor/types";
+import { cn } from "@/lib/utils";
 
 type Props = {
   activeTool: ActiveTool;
@@ -6,7 +7,16 @@ type Props = {
 };
 
 const ShapeSidebar = ({ activeTool, onChangeActiveTool }: Props) => {
-  return <div>ShapeSidebar</div>;
+  return (
+    <aside
+      className={cn(
+        "relative z-[40] flex h-full w-[360px] flex-col border-r bg-white",
+        activeTool === "shapes" ? "visible" : "hidden",
+      )}
+    >
+      Shapes Sidebar
+    </aside>
+  );
 };
 
 export default ShapeSidebar;

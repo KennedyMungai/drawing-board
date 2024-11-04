@@ -23,6 +23,7 @@ export type BuildEditorProps = {
 
 export type Editor = {
   addCircle: () => void;
+  addSoftRectangle: () => void;
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";

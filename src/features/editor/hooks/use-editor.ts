@@ -1,9 +1,9 @@
 import { useAutoResize } from "@/features/editor/hooks/use-auto-resize";
-import { BuildEditorProps } from "@/features/editor/types";
+import { BuildEditorProps, Editor } from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
 
-const buildEditor = ({ canvas }: BuildEditorProps) => {
+const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
   return {
     addCircle: () => {
       const object = new fabric.Circle({

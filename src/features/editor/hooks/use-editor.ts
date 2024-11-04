@@ -51,7 +51,17 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
       addToCanvas(object);
     },
     addInverseTriangle: () => {
-      const object = new fabric.Triangle({ ...TRIANGLE_OPTIONS, angle: 180 });
+      const HEIGHT = 400;
+      const WIDTH = 400;
+
+      const object = new fabric.Polygon(
+        [
+          { x: 0, y: 0 },
+          { x: WIDTH, y: 0 },
+          { x: WIDTH / 2, y: HEIGHT },
+        ],
+        { ...TRIANGLE_OPTIONS },
+      );
 
       addToCanvas(object);
     },

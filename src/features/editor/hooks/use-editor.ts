@@ -1,4 +1,5 @@
 import { useAutoResize } from "@/features/editor/hooks/use-auto-resize";
+import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
 import {
   BuildEditorProps,
   CIRCLE_OPTIONS,
@@ -88,10 +89,16 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
 export const useEditor = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
+  const [selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
 
   useAutoResize({
     canvas,
     container,
+  });
+
+  useCanvasEvents({
+    canvas,
+    setSelectedObjects,
   });
 
   const editor = useMemo(() => {

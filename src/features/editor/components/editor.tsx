@@ -62,7 +62,12 @@ const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <main className="relative flex flex-1 flex-col overflow-auto bg-muted">
-          <Toolbar />
+          <Toolbar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+            key={JSON.stringify(editor?.canvas?.getActiveObject())}
+          />
           <div
             ref={containerRef}
             className="h-[calc(100%-124px)] flex-1 bg-muted"

@@ -11,9 +11,9 @@ import {
   STROKE_WIDTH,
   TRIANGLE_OPTIONS,
 } from "@/features/editor/types";
+import { isTextType } from "@/features/editor/utils";
 import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
-import { isTextType } from "../utils";
 
 const buildEditor = ({
   canvas,

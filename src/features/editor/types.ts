@@ -45,6 +45,7 @@ export type BuildEditorProps = {
   fillColor: string;
   strokeColor: string;
   strokeWidth: number;
+  selectedObjects: fabric.Object[];
   setFillColor: (value: string) => void;
   setStrokeColor: (value: string) => void;
   setStrokeWidth: (value: number) => void;
@@ -64,6 +65,7 @@ export type Editor = {
   strokeColor: string;
   strokeWidth: number;
   canvas: fabric.Canvas;
+  selectedObjects: fabric.Object[];
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";

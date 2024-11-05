@@ -23,6 +23,7 @@ const buildEditor = ({
   setStrokeWidth,
   strokeColor,
   strokeWidth,
+  selectedObjects,
 }: BuildEditorProps): Editor => {
   const getWorkspace = () =>
     canvas.getObjects().find((object) => object.name === "clip");
@@ -160,14 +161,14 @@ const buildEditor = ({
     fillColor,
     strokeColor,
     strokeWidth,
+    selectedObjects,
   };
 };
 
 export const useEditor = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
+  const [selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
 
   const [fillColor, setFillColor] = useState(FILL_COLOR);
   const [strokeColor, setStrokeColor] = useState(STROKE_COLOR);
@@ -193,10 +194,11 @@ export const useEditor = () => {
         setStrokeColor,
         strokeWidth,
         setStrokeWidth,
+        selectedObjects,
       });
 
     return undefined;
-  }, [canvas, fillColor, strokeColor, strokeWidth]);
+  }, [canvas, fillColor, strokeColor, strokeWidth, selectedObjects]);
 
   const init = useCallback(
     ({

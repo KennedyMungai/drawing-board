@@ -115,3 +115,13 @@ export const DIAMOND_OPTIONS = {
   height: 600,
   angle: 0,
 };
+
+export const selectionDependentTools = [
+  "fill",
+  "font",
+  "filter",
+  "opacity",
+  "remove-bg",
+  "stroke-color",
+  "stroke-width",
+];

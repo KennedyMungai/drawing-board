@@ -165,6 +165,7 @@ const buildEditor = ({
 
       const value = selectedObject.get("fill") || fillColor;
 
+      // Currently gradients and colors are not supported in this application
       return value as string;
     },
     strokeColor,

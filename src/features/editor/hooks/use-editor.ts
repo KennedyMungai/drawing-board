@@ -89,7 +89,8 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
 export const useEditor = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  const [selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
 
   useAutoResize({
     canvas,

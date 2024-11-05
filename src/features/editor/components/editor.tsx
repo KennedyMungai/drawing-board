@@ -11,14 +11,8 @@ import { ActiveTool, selectionDependentTools } from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+
 const Editor = () => {
-  const { init, editor } = useEditor({
-    clearSelectionCallback: () => {},
-  });
-
-  const canvasRef = useRef(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
 
   const onChangeActiveTool = useCallback(
@@ -43,6 +37,12 @@ const Editor = () => {
       setActiveTool("select");
     }
   }, [activeTool]);
+
+  const { init, editor } = useEditor({
+    clearSelectionCallback: onClearSelection,
+  });
+  const canvasRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasRef.current!, {

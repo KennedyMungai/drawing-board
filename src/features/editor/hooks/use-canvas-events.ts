@@ -38,5 +38,5 @@ export const useCanvasEvents = ({
     };
 
     // There is no need to put setSelectedObjects in the dependency array as it is a local state dispatcher
-  }, [canvas, setSelectedObjects]);
+  }, [canvas, setSelectedObjects, clearSelectionCallback]);
 };

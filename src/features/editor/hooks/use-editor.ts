@@ -50,6 +50,8 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         object.set({ fill: value });
       });
+
+      canvas.renderAll();
     },
     changeStrokeColor: (value: string) => {
       setStrokeColor(value);
@@ -64,6 +66,8 @@ const buildEditor = ({
 
         object.set({ stroke: value });
       });
+
+      canvas.renderAll()
     },
     changeStrokeWidth: (value: number) => {
       setStrokeWidth(value);
@@ -71,6 +75,8 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         object.set({ strokeWidth: value });
       });
+
+      canvas.renderAll();
     },
     addCircle: () => {
       const object = new fabric.Circle({ ...CIRCLE_OPTIONS });

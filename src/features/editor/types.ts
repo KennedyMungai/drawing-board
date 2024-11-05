@@ -61,7 +61,6 @@ export type Editor = {
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
-  // fillColor: string;
   getActiveFillColor: () => void;
   strokeColor: string;
   strokeWidth: number;

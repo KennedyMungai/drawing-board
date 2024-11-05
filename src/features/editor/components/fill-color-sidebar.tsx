@@ -1,9 +1,9 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ColorPicker from "@/features/editor/components/color-picker";
 import ToolSidebarClose from "@/features/editor/components/tool-sidebar-close";
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
 import { ActiveTool, Editor, FILL_COLOR } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
-import ColorPicker from "@/features/editor/components/color-picker";
 
 type Props = {
   activeTool: ActiveTool;

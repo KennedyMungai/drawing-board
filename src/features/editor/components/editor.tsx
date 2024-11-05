@@ -1,5 +1,6 @@
 "use client";
 
+import FillColorSidebar from "@/features/editor/components/fill-color-sidebar";
 import Footer from "@/features/editor/components/footer";
 import Navbar from "@/features/editor/components/navbar";
 import ShapeSidebar from "@/features/editor/components/shape-sidebar";
@@ -57,6 +58,11 @@ const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <ShapeSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <FillColorSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}

@@ -67,7 +67,7 @@ const buildEditor = ({
         object.set({ stroke: value });
       });
 
-      canvas.renderAll()
+      canvas.renderAll();
     },
     changeStrokeWidth: (value: number) => {
       setStrokeWidth(value);
@@ -84,17 +84,34 @@ const buildEditor = ({
       addToCanvas(object);
     },
     addSoftRectangle: () => {
-      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 50, ry: 50 });
+      const object = new fabric.Rect({
+        ...RECTANGLE_OPTIONS,
+        rx: 50,
+        ry: 50,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth,
+      });
 
       addToCanvas(object);
     },
     addRectangle: () => {
-      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS });
+      const object = new fabric.Rect({
+        ...RECTANGLE_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth,
+      });
 
       addToCanvas(object);
     },
     addTriangle: () => {
-      const object = new fabric.Triangle({ ...TRIANGLE_OPTIONS });
+      const object = new fabric.Triangle({
+        ...TRIANGLE_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth,
+      });
 
       addToCanvas(object);
     },
@@ -108,7 +125,12 @@ const buildEditor = ({
           { x: WIDTH, y: 0 },
           { x: WIDTH / 2, y: HEIGHT },
         ],
-        { ...TRIANGLE_OPTIONS },
+        {
+          ...TRIANGLE_OPTIONS,
+          fill: fillColor,
+          stroke: strokeColor,
+          strokeWidth,
+        },
       );
 
       addToCanvas(object);
@@ -124,7 +146,12 @@ const buildEditor = ({
           { x: WIDTH / 2, y: HEIGHT },
           { x: 0, y: HEIGHT / 2 },
         ],
-        { ...DIAMOND_OPTIONS },
+        {
+          ...DIAMOND_OPTIONS,
+          fill: fillColor,
+          stroke: strokeColor,
+          strokeWidth,
+        },
       );
 
       addToCanvas(object);

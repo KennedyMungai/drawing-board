@@ -12,10 +12,13 @@ type Props = {
 };
 
 const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
-  const selectedObject = editor?.canvas?.getActiveObject();
-
-  // const fillColor = getProperty("fill");
   const fillColor = editor?.fillColor;
+
+  if (editor?.selectedObjects.length === 0) {
+    return (
+      <div className="z-[49] flex h-[56px] w-full shrink-0 items-center gap-x-2 overflow-x-auto border-b bg-white p-2" />
+    );
+  }
 
   return (
     <div className="z-[49] flex h-[56px] w-full shrink-0 items-center gap-x-2 overflow-x-auto border-b bg-white p-2">

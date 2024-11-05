@@ -10,6 +10,7 @@
 			"clsx",
 			"lucide",
 			"tailwindcss",
+			"textbox",
 			"turbopack"
 		]
 	}

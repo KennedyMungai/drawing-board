@@ -1,8 +1,9 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ToolSidebarClose from "@/features/editor/components/tool-sidebar-close";
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
-import { ActiveTool, Editor } from "@/features/editor/types";
+import { ActiveTool, Editor, FILL_COLOR } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
+import ColorPicker from "@/features/editor/components/color-picker";
 
 type Props = {
   activeTool: ActiveTool;
@@ -19,6 +20,8 @@ const FillColorSidebar = ({
 
   const onChange = (value: string) => editor?.changeFillColor(value);
 
+  const value = editor?.fillColor ?? FILL_COLOR;
+
   return (
     <aside
       className={cn(
@@ -31,7 +34,9 @@ const FillColorSidebar = ({
         description="Add fill color to your element"
       />
       <ScrollArea>
-        <div className="space-y-6 p-4"></div>
+        <div className="space-y-6 p-4">
+          <ColorPicker onChange={onChange} value={value} />
+        </div>
       </ScrollArea>
       <ToolSidebarClose onClick={onClose} />
     </aside>

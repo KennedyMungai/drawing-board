@@ -13,6 +13,7 @@ import {
 } from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
+import { isTextType } from "../utils";
 
 const buildEditor = ({
   canvas,
@@ -54,6 +55,12 @@ const buildEditor = ({
       setStrokeColor(value);
 
       canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          object.set({ fill: value });
+
+          return;
+        }
+
         object.set({ stroke: value });
       });
     },

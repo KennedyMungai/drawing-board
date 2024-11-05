@@ -37,6 +37,9 @@ export type Editor = {
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";

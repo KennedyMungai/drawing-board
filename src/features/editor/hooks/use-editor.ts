@@ -55,6 +55,7 @@ const buildEditor = ({
       setStrokeColor(value);
 
       canvas.getActiveObjects().forEach((object) => {
+        // Text types don't have stroke
         if (isTextType(object.type)) {
           object.set({ fill: value });
 
@@ -122,6 +123,9 @@ const buildEditor = ({
 
       addToCanvas(object);
     },
+    fillColor,
+    strokeColor,
+    strokeWidth,
   };
 };
 

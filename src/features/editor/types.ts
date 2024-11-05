@@ -37,7 +37,7 @@ export const STROKE_COLOR = "rgba(0,0,0,1)";
 export const STROKE_WIDTH = 2;
 
 export const CIRCLE_OPTIONS = {
-  radius: 150,
+  radius: 225,
   left: 100,
   top: 100,
   fill: FILL_COLOR,

@@ -22,6 +22,14 @@ export const useCanvasEvents = ({ canvas, setSelectedObjects }: Props) => {
       });
     }
 
+    return () => {
+      if (canvas) {
+        canvas.off("selected:created");
+        canvas.off("selected:updated");
+        canvas.off("selection:cleared");
+      }
+    };
+
     // There is no need to put setSelectedObjects in the dependency array as it is a local state dispatcher
   }, [canvas, setSelectedObjects]);
 };

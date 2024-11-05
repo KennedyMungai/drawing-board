@@ -64,6 +64,8 @@ export type Editor = {
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
   changeStrokeDashArray: (value: number[]) => void;
+  bringForward: () => void;
+  sendBackwards: () => void;
   strokeDashArray: number[];
   fillColor: string;
   strokeColor: string;

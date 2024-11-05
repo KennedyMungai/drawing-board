@@ -49,6 +49,25 @@ const buildEditor = ({
   };
 
   return {
+    bringForward: () => {
+      canvas.getActiveObjects().forEach((object) => {
+        canvas.bringForward(object);
+      });
+
+      canvas.renderAll();
+
+      // TODO: Fix workspace overflow
+    },
+    sendBackwards: () => {
+      canvas.getActiveObjects().forEach((object) => {
+        canvas.sendBackwards(object);
+      });
+
+      canvas.renderAll();
+
+      const workspace = getWorkspace();
+      workspace?.sendToBack();
+    },
     changeFillColor: (value: string) => {
       setFillColor(value);
 
@@ -57,6 +76,9 @@ const buildEditor = ({
       });
 
       canvas.renderAll();
+
+      const workspace = getWorkspace();
+      workspace?.sendToBack();
     },
     changeStrokeColor: (value: string) => {
       setStrokeColor(value);

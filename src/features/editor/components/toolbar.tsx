@@ -9,6 +9,7 @@ import {
   STROKE_COLOR,
 } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
+import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
 import { BsBorderWidth } from "react-icons/bs";
 
 type Props = {
@@ -72,6 +73,28 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
             className={cn(activeTool === "stroke-width" && "bg-gray-100")}
           >
             <BsBorderWidth className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex h-full items-center justify-center">
+        <Hint label="Bring Forward" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => editor?.bringForward()}
+            size="icon"
+            variant={"ghost"}
+          >
+            <ArrowUpIcon className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex h-full items-center justify-center">
+        <Hint label="Send Backwards" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => editor?.sendBackwards()}
+            size="icon"
+            variant={"ghost"}
+          >
+            <ArrowDownIcon className="size-4" />
           </Button>
         </Hint>
       </div>

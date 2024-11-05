@@ -61,7 +61,7 @@ export type Editor = {
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
-  getActiveFillColor: () => string;
+  fillColor: string;
   strokeColor: string;
   strokeWidth: number;
   canvas: fabric.Canvas;

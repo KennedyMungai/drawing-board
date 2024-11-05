@@ -158,16 +158,7 @@ const buildEditor = ({
       addToCanvas(object);
     },
     canvas,
-    getActiveFillColor: () => {
-      const selectedObject = selectedObjects[0];
-
-      if (!selectedObjects) return fillColor;
-
-      const value = selectedObject.get("fill") || fillColor;
-
-      // Currently gradients and colors are not supported in this application
-      return value as string;
-    },
+    fillColor,
     strokeColor,
     strokeWidth,
     selectedObjects,

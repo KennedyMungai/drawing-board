@@ -40,6 +40,7 @@ export type Editor = {
   fillColor: string;
   strokeColor: string;
   strokeWidth: number;
+  canvas: fabric.Canvas;
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";

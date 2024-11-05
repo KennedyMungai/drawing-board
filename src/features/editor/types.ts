@@ -73,7 +73,7 @@ export const DIAMOND_OPTIONS = {
   fill: FILL_COLOR,
   stroke: STROKE_COLOR,
   stroke_width: STROKE_WIDTH,
-  width: 400,
-  height: 400,
+  width: 600,
+  height: 600,
   angle: 0,
 };

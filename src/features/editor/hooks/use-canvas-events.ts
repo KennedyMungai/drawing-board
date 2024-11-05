@@ -9,11 +9,11 @@ type Props = {
 export const useCanvasEvents = ({ canvas, setSelectedObjects }: Props) => {
   useEffect(() => {
     if (canvas) {
-      canvas.on("selected:created", (e) => {
+      canvas.on("selection:created", (e) => {
         setSelectedObjects(e.selected || []);
       });
 
-      canvas.on("selected:updated", (e) => {
+      canvas.on("selection:updated", (e) => {
         setSelectedObjects(e.selected || []);
       });
 
@@ -24,8 +24,8 @@ export const useCanvasEvents = ({ canvas, setSelectedObjects }: Props) => {
 
     return () => {
       if (canvas) {
-        canvas.off("selected:created");
-        canvas.off("selected:updated");
+        canvas.off("selection:created");
+        canvas.off("selection:updated");
         canvas.off("selection:cleared");
       }
     };

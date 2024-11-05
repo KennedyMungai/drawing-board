@@ -125,3 +125,7 @@ export const selectionDependentTools = [
   "stroke-color",
   "stroke-width",
 ];
+
+export type EditorHookProps = {
+  clearSelectionCallback?: () => void;
+};

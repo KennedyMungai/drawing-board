@@ -7,12 +7,14 @@ import ShapeSidebar from "@/features/editor/components/shape-sidebar";
 import Sidebar from "@/features/editor/components/sidebar";
 import Toolbar from "@/features/editor/components/toolbar";
 import { useEditor } from "@/features/editor/hooks/use-editor";
-import { ActiveTool } from "@/features/editor/types";
+import { ActiveTool, selectionDependentTools } from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const Editor = () => {
-  const { init, editor } = useEditor();
+  const { init, editor } = useEditor({
+    clearSelectionCallback: () => {},
+  });
 
   const canvasRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,6 +37,12 @@ const Editor = () => {
     },
     [activeTool],
   );
+
+  const onClearSelection = useCallback(() => {
+    if (selectionDependentTools.includes(activeTool)) {
+      setActiveTool("select");
+    }
+  }, [activeTool]);
 
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasRef.current!, {

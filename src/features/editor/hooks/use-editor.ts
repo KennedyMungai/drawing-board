@@ -8,6 +8,7 @@ import {
   EditorHookProps,
   FILL_COLOR,
   FONT_FAMILY,
+  FONT_SIZE,
   FONT_WEIGHT,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
@@ -83,6 +84,16 @@ const buildEditor = ({
 
       canvas.renderAll();
     },
+    changeFontSize: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error fontSize has no type definitions
+          object.set({ fontSize: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
     changeTextAlign: (value: string) => {
       canvas.getActiveObjects().forEach((object) => {
         if (isTextType(object.type)) {
@@ -142,6 +153,16 @@ const buildEditor = ({
       const value = selectedObject.get("textAlign") || "left";
 
       return value as string;
+    },
+    getActiveFontSize: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) return FONT_SIZE;
+
+      // @ts-expect-error fontSize has no type definitions
+      const value = selectedObject.get("fontSize") || FONT_SIZE;
+
+      return value as number;
     },
     changeFontWeight: (value: number) => {
       canvas.getActiveObjects().forEach((object) => {

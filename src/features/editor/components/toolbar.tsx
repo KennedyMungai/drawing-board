@@ -2,10 +2,12 @@
 
 import Hint from "@/components/hint";
 import { Button } from "@/components/ui/button";
+import FontSizeInput from "@/features/editor/components/font-size-input";
 import {
   ActiveTool,
   Editor,
   FILL_COLOR,
+  FONT_SIZE,
   FONT_WEIGHT,
   STROKE_COLOR,
 } from "@/features/editor/types";
@@ -36,16 +38,17 @@ type Props = {
 };
 
 const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
-  const initialFillColor = editor?.fillColor || FILL_COLOR;
-  const initialStrokeColor = editor?.strokeColor || STROKE_COLOR;
+  const initialFillColor = editor?.fillColor ?? FILL_COLOR;
+  const initialStrokeColor = editor?.strokeColor ?? STROKE_COLOR;
 
   const initialFontFamily = editor?.getActiveFontFamily();
-  const initialFontWeight = editor?.getActiveFontWeight() || FONT_WEIGHT;
-  const initialFontStyle = editor?.getActiveFontStyle() || "normal";
-  const initialFontLinethrough = editor?.getActiveFontLinethrough() || false;
-  const initialFontUnderline = editor?.getActiveFontUnderline() || false;
+  const initialFontWeight = editor?.getActiveFontWeight() ?? FONT_WEIGHT;
+  const initialFontStyle = editor?.getActiveFontStyle() ?? "normal";
+  const initialFontLinethrough = editor?.getActiveFontLinethrough() ?? false;
+  const initialFontUnderline = editor?.getActiveFontUnderline() ?? false;
+  const initialFontSize = editor?.getActiveFontSize() ?? FONT_SIZE;
 
-  const initialTextAlign = editor?.getActiveTextAlign() || "left";
+  const initialTextAlign = editor?.getActiveTextAlign() ?? "left";
 
   const selectedObjectType = editor?.selectedObjects[0]?.type;
   const selectedObject = editor?.selectedObjects[0];
@@ -61,7 +64,16 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
     fontLinethrough: initialFontLinethrough,
     fontUnderline: initialFontUnderline,
     textAlign: initialTextAlign,
+    fontSize: initialFontSize,
   });
+
+  const onChangeFontSize = (value: number) => {
+    if (!selectedObject) return;
+
+    editor?.changeFontSize(value);
+
+    setProperties((current) => ({ ...current, fontSize: value }));
+  };
 
   const onChangeTextAlign = (value: string) => {
     if (!selectedObject) return;
@@ -292,6 +304,14 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
               <AlignRightIcon className="size-4" />
             </Button>
           </Hint>
+        </div>
+      )}
+      {isText && (
+        <div className="flex h-full items-center justify-center">
+          <FontSizeInput
+            value={properties.fontSize}
+            onChange={onChangeFontSize}
+          />
         </div>
       )}
       <div className="flex h-full items-center justify-center">

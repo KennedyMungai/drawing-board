@@ -95,6 +95,7 @@ export type Editor = {
   getActiveFontFamily: () => string;
   getActiveFontLinethrough: () => boolean;
   getActiveFontUnderline: () => boolean;
+  getActiveFontSize: () => number;
   addText: (value: string, options?: ITextboxOptions) => void;
   changeFontFamily: (value: string) => void;
   changeFontWeight: (value: number) => void;
@@ -105,6 +106,7 @@ export type Editor = {
   changeFontStyle: (value: string) => void;
   changeFontLinethrough: (value: boolean) => void;
   changeFontUnderline: (value: boolean) => void;
+  changeFontSize: (value: number) => void;
   fontFamily: string;
   strokeDashArray: number[];
   fillColor: string;

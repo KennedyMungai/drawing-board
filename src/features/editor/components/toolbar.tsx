@@ -10,7 +10,7 @@ import {
 } from "@/features/editor/types";
 import { isTextType } from "@/features/editor/utils";
 import { cn } from "@/lib/utils";
-import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, ChevronDownIcon } from "lucide-react";
 import { BsBorderWidth } from "react-icons/bs";
 import { RxTransparencyGrid } from "react-icons/rx";
 
@@ -23,6 +23,8 @@ type Props = {
 const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
   const fillColor = editor?.fillColor || FILL_COLOR;
   const strokeColor = editor?.strokeColor || STROKE_COLOR;
+
+  const fontFamily = editor?.getActiveFontFamily();
 
   const selectedObjectType = editor?.selectedObjects[0]?.type;
 
@@ -53,7 +55,7 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
           </Button>
         </Hint>
       </div>
-      {isText && (
+      {!isText && (
         <div className="flex h-full items-center justify-center">
           <Hint label="Stroke Color" side="bottom" sideOffset={5}>
             <Button
@@ -72,7 +74,7 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
           </Hint>
         </div>
       )}
-      {isText && (
+      {!isText && (
         <div className="flex h-full items-center justify-center">
           <Hint label="Stroke Width " side="bottom" sideOffset={5}>
             <Button
@@ -82,6 +84,22 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
               className={cn(activeTool === "stroke-width" && "bg-gray-100")}
             >
               <BsBorderWidth className="size-4" />
+            </Button>
+          </Hint>
+        </div>
+      )}
+      {isText && (
+        <div className="flex h-full items-center justify-center">
+          <Hint label="Font" side="bottom" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("font")}
+              variant={"ghost"}
+              className={cn("w-auto", activeTool === "font" && "bg-gray-100")}
+            >
+              <div className="max-w-[100px] truncate" style={{ fontFamily }}>
+                {fontFamily}
+              </div>
+              <ChevronDownIcon className="ml-2 size-4 shrink-0" />
             </Button>
           </Hint>
         </div>

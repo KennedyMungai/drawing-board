@@ -3,6 +3,7 @@
 import FillColorSidebar from "@/features/editor/components/fill-color-sidebar";
 import FontSidebar from "@/features/editor/components/font-sidebar";
 import Footer from "@/features/editor/components/footer";
+import ImageSidebar from "@/features/editor/components/image-sidebar";
 import Navbar from "@/features/editor/components/navbar";
 import OpacitySidebar from "@/features/editor/components/opacity-sidebar";
 import ShapeSidebar from "@/features/editor/components/shape-sidebar";
@@ -100,6 +101,11 @@ const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <FontSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <ImageSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}

@@ -213,7 +213,7 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
               onClick={toggleUnderline}
               size="icon"
               variant={"ghost"}
-              className={cn(properties.fontStyle === "italic" && "bg-gray-100")}
+              className={cn(properties.fontUnderline && "bg-gray-100")}
             >
               <FaUnderline className="size-4" />
             </Button>
@@ -227,7 +227,7 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
               onClick={toggleLinethrough}
               size="icon"
               variant={"ghost"}
-              className={cn(properties.fontStyle === "italic" && "bg-gray-100")}
+              className={cn(properties.fontLinethrough && "bg-gray-100")}
             >
               <FaStrikethrough className="size-4" />
             </Button>

@@ -83,6 +83,16 @@ const buildEditor = ({
 
       canvas.renderAll();
     },
+    changeTextAlign: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error textAlign has no type definitions
+          object.set({ textAlign: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
     changeFontStyle: (value: string) => {
       canvas.getActiveObjects().forEach((object) => {
         if (isTextType(object.type)) {
@@ -122,6 +132,16 @@ const buildEditor = ({
       const value = selectedObject.get("underline") || false;
 
       return value as boolean;
+    },
+    getActiveTextAlign: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) return "left";
+
+      // @ts-expect-error textAlign has no type definitions
+      const value = selectedObject.get("textAlign") || "left";
+
+      return value as string;
     },
     changeFontWeight: (value: number) => {
       canvas.getActiveObjects().forEach((object) => {

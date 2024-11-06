@@ -8,6 +8,7 @@ import {
   EditorHookProps,
   FILL_COLOR,
   FONT_FAMILY,
+  FONT_WEIGHT,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -61,6 +62,76 @@ const buildEditor = ({
       });
 
       addToCanvas(object);
+    },
+    changeFontLinethrough: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error lineThrough has no type definitions
+          object.set({ linethrough: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+    changeFontUnderline: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error underline has no type definitions
+          object.set({ underline: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+    changeFontStyle: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error fontStyle has no type definitions
+          object.set({ fontStyle: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+    getActiveFontStyle: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) return "normal";
+
+      // @ts-expect-error fontStyle has no type definitions
+      const value = selectedObject.get("fontStyle") || "normal";
+
+      return value as string;
+    },
+    getActiveFontLinethrough: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) return false;
+
+      // @ts-expect-error linethrough has no type definitions
+      const value = selectedObject.get("linethrough") || false;
+
+      return value as boolean;
+    },
+    getActiveFontUnderline: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) return false;
+
+      // @ts-expect-error underline has no type definitions
+      const value = selectedObject.get("underline") || false;
+
+      return value as boolean;
+    },
+    changeFontWeight: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error fontWeight has no type definitions
+          object.set({ fontWeight: value });
+        }
+      });
+
+      canvas.renderAll();
     },
     changeOpacity: (value: number) => {
       canvas.getActiveObjects().forEach((object) => {
@@ -250,6 +321,16 @@ const buildEditor = ({
       const value = selectedObject.get("fontFamily") || fontFamily;
 
       return value;
+    },
+    getActiveFontWeight: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) return FONT_WEIGHT;
+
+      // @ts-expect-error fontWeight has no type definitions
+      const value = selectedObject.get("fontWeight") || FONT_WEIGHT;
+
+      return value as number;
     },
     canvas,
     fillColor,

@@ -93,8 +93,16 @@ export type Editor = {
   changeOpacity: (value: number) => void;
   getActiveOpacity: () => number;
   getActiveFontFamily: () => string;
+  getActiveFontLinethrough: () => boolean;
+  getActiveFontUnderline: () => boolean;
   addText: (value: string, options?: ITextboxOptions) => void;
   changeFontFamily: (value: string) => void;
+  changeFontWeight: (value: number) => void;
+  getActiveFontWeight: () => number;
+  getActiveFontStyle: () => string;
+  changeFontStyle: (value: string) => void;
+  changeFontLinethrough: (value: boolean) => void;
+  changeFontUnderline: (value: boolean) => void;
   fontFamily: string;
   strokeDashArray: number[];
   fillColor: string;
@@ -112,6 +120,7 @@ export const STROKE_DASH_ARRAY = [];
 
 export const FONT_FAMILY = "Arial";
 export const FONT_SIZE = 32;
+export const FONT_WEIGHT = 400;
 
 export const CIRCLE_OPTIONS = {
   radius: 225,

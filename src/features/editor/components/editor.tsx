@@ -9,6 +9,7 @@ import Footer from "@/features/editor/components/footer";
 import ImageSidebar from "@/features/editor/components/image-sidebar";
 import Navbar from "@/features/editor/components/navbar";
 import OpacitySidebar from "@/features/editor/components/opacity-sidebar";
+import SettingsSidebar from "@/features/editor/components/settings-sidebar";
 import ShapeSidebar from "@/features/editor/components/shape-sidebar";
 import Sidebar from "@/features/editor/components/sidebar";
 import StrokeColorSidebar from "@/features/editor/components/stroke-color-sidebar";
@@ -120,6 +121,11 @@ const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <DrawSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <SettingsSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}

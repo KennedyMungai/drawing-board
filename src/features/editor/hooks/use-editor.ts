@@ -59,6 +59,7 @@ const buildEditor = ({
   };
 
   return {
+    getWorkspace,
     onCopy: () => copy(),
     onPaste: () => paste(),
     changeSize: (value: { width: number; height: number }) => {

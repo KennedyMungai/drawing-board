@@ -126,6 +126,7 @@ export type Editor = {
   changeStrokeDashArray: (value: number[]) => void;
   bringForward: () => void;
   sendBackwards: () => void;
+  getWorkspace: () => fabric.Object | undefined;
   changeOpacity: (value: number) => void;
   changeSize: (value: { width: number; height: number }) => void;
   changeBackground: (value: string) => void;

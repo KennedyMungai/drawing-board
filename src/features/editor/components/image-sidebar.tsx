@@ -5,6 +5,7 @@ import { ActiveTool, Editor } from "@/features/editor/types";
 import { useGetImages } from "@/features/images/api/use-get-images";
 import { cn } from "@/lib/utils";
 import { LoaderIcon, TriangleAlertIcon } from "lucide-react";
+import Image from "next/image";
 
 type Props = {
   activeTool: ActiveTool;
@@ -46,7 +47,24 @@ const ImageSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
         </div>
       )}
       <ScrollArea>
-        <div className="space-y-1 border-b p-4"></div>
+        <div className="space-y-4 border-b p-4">
+          {imageData?.data &&
+            imageData?.data.map((image) => {
+              return (
+                <button
+                  key={image.id}
+                  className="relative h-[100px] w-full overflow-hidden rounded-sm border bg-muted transition group-hover:opacity-75"
+                >
+                  <Image
+                    src={image.urls.small}
+                    fill
+                    alt={image.alt_description ?? "Image"}
+                    className="object-cover"
+                  />
+                </button>
+              );
+            })}
+        </div>
       </ScrollArea>
       <ToolSidebarClose onClick={onClose} />
     </aside>

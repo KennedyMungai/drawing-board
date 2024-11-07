@@ -2,6 +2,30 @@ import { fabric } from "fabric";
 import { ITextboxOptions } from "fabric/fabric-impl";
 import * as material from "material-colors";
 
+export const filters = [
+  "none",
+  "polaroid",
+  "sepia",
+  "kodachrome",
+  "contrast",
+  "brightness",
+  "brownie",
+  "vintage",
+  "technicolor",
+  "pixelate",
+  "invert",
+  "blur",
+  "sharpen",
+  "emboss",
+  "removeColor",
+  "blacknwhite",
+  "vibrance",
+  "blendcolor",
+  "huerotate",
+  "resize",
+  "gamma",
+];
+
 export const fonts = [
   "Arial",
   "Arial Black",

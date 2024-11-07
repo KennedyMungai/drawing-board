@@ -1,6 +1,7 @@
 "use client";
 
 import AiSidebar from "@/features/editor/components/ai-sidebar";
+import DrawSidebar from "@/features/editor/components/draw-sidebar";
 import FillColorSidebar from "@/features/editor/components/fill-color-sidebar";
 import FilterSidebar from "@/features/editor/components/filter-sidebar";
 import FontSidebar from "@/features/editor/components/font-sidebar";
@@ -21,7 +22,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const Editor = () => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
-  
+
   const onClearSelection = useCallback(() => {
     if (selectionDependentTools.includes(activeTool)) {
       setActiveTool("select");
@@ -114,6 +115,11 @@ const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <AiSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <DrawSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}

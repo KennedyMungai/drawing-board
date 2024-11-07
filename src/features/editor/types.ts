@@ -98,6 +98,7 @@ export type BuildEditorProps = {
   fontFamily: string;
   copy: () => void;
   paste: () => void;
+  autoZoom: () => void;
   setFontFamily: (value: string) => void;
   setStrokeDashArray: (value: number[]) => void;
   setFillColor: (value: string) => void;
@@ -126,6 +127,8 @@ export type Editor = {
   bringForward: () => void;
   sendBackwards: () => void;
   changeOpacity: (value: number) => void;
+  changeSize: (value: { width: number; height: number }) => void;
+  changeBackground: (value: string) => void;
   getActiveOpacity: () => number;
   getActiveFontFamily: () => string;
   getActiveFontLinethrough: () => boolean;

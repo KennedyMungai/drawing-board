@@ -16,6 +16,9 @@ export const createFilter = (value: string) => {
   let effect;
 
   switch (value) {
+    case "grayscale":
+      effect = new fabric.Image.filters.Grayscale();
+      break;
     case "polaroid":
       // @ts-expect-error Polaroid has no type definitions
       effect = new fabric.Image.filters.Polaroid({ angle: 45 });
@@ -98,6 +101,9 @@ export const createFilter = (value: string) => {
       effect = new fabric.Image.filters.Gamma({
         gamma: [1, 0.5, 2.1],
       });
+      break;
+    case "saturation":
+      effect = new fabric.Image.filters.Saturation({ saturation: 0.5 });
       break;
     default:
       effect = null;

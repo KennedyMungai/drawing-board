@@ -4,6 +4,7 @@ import * as material from "material-colors";
 
 export const filters = [
   "none",
+  "grayscale",
   "polaroid",
   "sepia",
   "kodachrome",
@@ -24,6 +25,7 @@ export const filters = [
   "huerotate",
   "resize",
   "gamma",
+  "saturation",
 ];
 
 export const fonts = [

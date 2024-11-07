@@ -103,7 +103,7 @@ export const createFilter = (value: string) => {
       });
       break;
     case "saturation":
-      effect = new fabric.Image.filters.Saturation({ saturation: 0.5 });
+      effect = new fabric.Image.filters.Saturation({ saturation: 0.7 });
       break;
     default:
       effect = null;

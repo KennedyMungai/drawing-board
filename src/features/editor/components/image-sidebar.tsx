@@ -57,6 +57,7 @@ const ImageSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
                 return (
                   <button
                     key={image.id}
+                    onClick={() => editor?.addImage(image.urls.regular)}
                     className="group relative h-[100px] w-full overflow-hidden rounded-sm border bg-muted transition hover:opacity-75"
                   >
                     <Image

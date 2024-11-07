@@ -19,7 +19,10 @@ type Props = {
 };
 
 const DrawSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
-  const onClose = () => onChangeActiveTool("select");
+  const onClose = () => {
+    onChangeActiveTool("select");
+    editor?.disableDrawingMode();
+  };
 
   const colorValue = editor?.strokeColor ?? STROKE_COLOR;
   const widthValue = editor?.strokeWidth ?? STROKE_WIDTH;

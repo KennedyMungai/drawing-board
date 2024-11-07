@@ -1,5 +1,6 @@
 "use client";
 
+import AiSidebar from "@/features/editor/components/ai-sidebar";
 import FillColorSidebar from "@/features/editor/components/fill-color-sidebar";
 import FilterSidebar from "@/features/editor/components/filter-sidebar";
 import FontSidebar from "@/features/editor/components/font-sidebar";
@@ -112,6 +113,11 @@ const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <FilterSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <AiSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}

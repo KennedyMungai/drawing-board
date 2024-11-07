@@ -23,6 +23,8 @@ import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
 
 const buildEditor = ({
+  copy,
+  paste,
   canvas,
   fillColor,
   setFillColor,
@@ -56,6 +58,8 @@ const buildEditor = ({
   };
 
   return {
+    onCopy: () => copy(),
+    onPaste: () => paste(),
     changeImageFilter: (value: string) => {
       const objects = canvas.getActiveObjects();
 
@@ -434,7 +438,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
 
-  useClipboard({ canvas });
+  const { copy, paste } = useClipboard({ canvas });
 
   useAutoResize({
     canvas,
@@ -450,6 +454,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const editor = useMemo(() => {
     if (canvas)
       return buildEditor({
+        copy,
+        paste,
         canvas,
         fillColor,
         setFillColor,
@@ -473,6 +479,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     selectedObjects,
     strokeDashArray,
     fontFamily,
+    copy,
+    paste,
   ]);
 
   const init = useCallback(

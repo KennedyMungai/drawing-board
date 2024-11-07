@@ -96,6 +96,8 @@ export type BuildEditorProps = {
   selectedObjects: fabric.Object[];
   strokeDashArray: number[];
   fontFamily: string;
+  copy: () => void;
+  paste: () => void;
   setFontFamily: (value: string) => void;
   setStrokeDashArray: (value: number[]) => void;
   setFillColor: (value: string) => void;
@@ -104,6 +106,8 @@ export type BuildEditorProps = {
 };
 
 export type Editor = {
+  onCopy: () => void;
+  onPaste: () => void;
   changeImageFilter: (value: string) => void;
   addImage: (value: string) => void;
   delete: () => void;

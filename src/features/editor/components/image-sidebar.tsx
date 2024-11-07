@@ -6,6 +6,7 @@ import { useGetImages } from "@/features/images/api/use-get-images";
 import { cn } from "@/lib/utils";
 import { LoaderIcon, TriangleAlertIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   activeTool: ActiveTool;
@@ -47,23 +48,35 @@ const ImageSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
         </div>
       )}
       <ScrollArea>
-        <div className="space-y-4 border-b p-4">
-          {imageData?.data &&
-            imageData?.data.map((image) => {
-              return (
-                <button
-                  key={image.id}
-                  className="relative h-[100px] w-full overflow-hidden rounded-sm border bg-muted transition group-hover:opacity-75"
-                >
-                  <Image
-                    src={image.urls.small}
-                    fill
-                    alt={image.alt_description ?? "Image"}
-                    className="object-cover"
-                  />
-                </button>
-              );
-            })}
+        <div className="p-4">
+          <div className="grid grid-cols-2 gap-4">
+            {imageData?.data &&
+              imageData?.data.map((image) => {
+                console.log(image.user.name);
+
+                return (
+                  <button
+                    key={image.id}
+                    className="group relative h-[100px] w-full overflow-hidden rounded-sm border bg-muted transition hover:opacity-75"
+                  >
+                    <Image
+                      src={image.urls.small}
+                      fill
+                      sizes="(100vw, 100vh)"
+                      alt={image.alt_description ?? "Image"}
+                      className="object-cover"
+                    />
+                    <Link
+                      href={image.links.html}
+                      target="_blank"
+                      className="absolute bottom-0 left-0 z-10 w-full truncate bg-black/50 p-1 text-left text-[10px] text-white opacity-0 transition hover:underline group-hover:opacity-100"
+                    >
+                      {image.user.name}
+                    </Link>
+                  </button>
+                );
+              })}
+          </div>
         </div>
       </ScrollArea>
       <ToolSidebarClose onClick={onClose} />

@@ -17,7 +17,7 @@ import {
   TEXT_OPTIONS,
   TRIANGLE_OPTIONS,
 } from "@/features/editor/types";
-import { isTextType } from "@/features/editor/utils";
+import { createFilter, isTextType } from "@/features/editor/utils";
 import { fabric } from "fabric";
 import { useCallback, useMemo, useState } from "react";
 
@@ -55,6 +55,21 @@ const buildEditor = ({
   };
 
   return {
+    changeImageFilter: (value: string) => {
+      const objects = canvas.getActiveObjects();
+
+      objects.forEach((object) => {
+        if (object.type === "image") {
+          const imageObject = object as fabric.Image;
+
+          const effect = createFilter(value);
+
+          imageObject.filters = effect ? [effect] : [];
+          imageObject.applyFilters();
+          canvas.renderAll();
+        }
+      });
+    },
     addImage: (value: string) => {
       fabric.Image.fromURL(
         value,

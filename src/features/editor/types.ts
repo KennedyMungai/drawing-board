@@ -78,6 +78,7 @@ export type BuildEditorProps = {
 };
 
 export type Editor = {
+  changeImageFilter: (value: string) => void;
   addImage: (value: string) => void;
   delete: () => void;
   addCircle: () => void;

@@ -21,24 +21,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const Editor = () => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
-
-  const onChangeActiveTool = useCallback(
-    (tool: ActiveTool) => {
-      if (tool === activeTool) return setActiveTool("select");
-
-      if (tool === "draw") {
-        // TODO: Enable draw mode
-      }
-
-      if (activeTool === "draw") {
-        // TODO: Disable draw mode
-      }
-
-      setActiveTool(tool);
-    },
-    [activeTool],
-  );
-
+  
   const onClearSelection = useCallback(() => {
     if (selectionDependentTools.includes(activeTool)) {
       setActiveTool("select");
@@ -50,6 +33,19 @@ const Editor = () => {
   });
   const canvasRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const onChangeActiveTool = useCallback(
+    (tool: ActiveTool) => {
+      if (tool === activeTool) return setActiveTool("select");
+
+      if (tool === "draw") editor?.enableDrawingMode();
+
+      if (activeTool === "draw") editor?.disableDrawingMode();
+
+      setActiveTool(tool);
+    },
+    [activeTool, editor],
+  );
 
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasRef.current!, {

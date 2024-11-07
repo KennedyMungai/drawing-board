@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Textarea } from "@/components/ui/textarea";
 import ToolSidebarClose from "@/features/editor/components/tool-sidebar-close";
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
 import { ActiveTool, Editor } from "@/features/editor/types";
@@ -22,7 +24,18 @@ const AiSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
     >
       <ToolSidebarHeader title="AI" description="Generate an image using AI" />
       <ScrollArea>
-        <div className="space-y-6 p-4"></div>
+        <form className="space-y-4 p-4">
+          <Textarea
+            cols={30}
+            rows={10}
+            placeholder="Describe your image"
+            required
+            minLength={3}
+          />
+          <Button className="w-full" type="submit">
+            Generate
+          </Button>
+        </form>
       </ScrollArea>
       <ToolSidebarClose onClick={onClose} />
     </aside>

@@ -125,7 +125,6 @@ export type Editor = {
   getActiveFontLinethrough: () => boolean;
   getActiveFontUnderline: () => boolean;
   getActiveFontSize: () => number;
-  getActiveFilters: () => string[];
   addText: (value: string, options?: ITextboxOptions) => void;
   changeFontFamily: (value: string) => void;
   changeFontWeight: (value: number) => void;

@@ -14,8 +14,6 @@ type Props = {
 const FilterSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
   const onClose = () => onChangeActiveTool("select");
 
-  const value = editor?.getActiveFilters() || [];
-
   return (
     <aside
       className={cn(
@@ -34,10 +32,7 @@ const FilterSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
               key={filter}
               variant={"secondary"}
               size="lg"
-              className={cn(
-                "h-16 w-full justify-start text-left",
-                value[0] === filter && "border-2 border-blue-500",
-              )}
+              className={"h-16 w-full justify-start text-left"}
               onClick={() => editor?.changeImageFilter(filter)}
             >
               {filter}

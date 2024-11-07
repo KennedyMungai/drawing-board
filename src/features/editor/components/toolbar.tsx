@@ -31,6 +31,7 @@ import {
   FaUnderline,
 } from "react-icons/fa6";
 import { RxTransparencyGrid } from "react-icons/rx";
+import { TbColorFilter } from "react-icons/tb";
 
 type Props = {
   editor: Editor | undefined;
@@ -242,7 +243,7 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
       )}
       {isText && (
         <div className="flex h-full items-center justify-center">
-          <Hint label="Italic" side="bottom" sideOffset={5}>
+          <Hint label="Underline" side="bottom" sideOffset={5}>
             <Button
               onClick={toggleUnderline}
               size="icon"
@@ -256,7 +257,7 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
       )}
       {isText && (
         <div className="flex h-full items-center justify-center">
-          <Hint label="Italic" side="bottom" sideOffset={5}>
+          <Hint label="Strike Through" side="bottom" sideOffset={5}>
             <Button
               onClick={toggleLinethrough}
               size="icon"
@@ -316,6 +317,20 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
             value={properties.fontSize}
             onChange={onChangeFontSize}
           />
+        </div>
+      )}
+      {isImage && (
+        <div className="flex h-full items-center justify-center">
+          <Hint label="Filters" side="bottom" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("filter")}
+              size="icon"
+              variant={"ghost"}
+              className={cn(activeTool === "filter" && "bg-gray-100")}
+            >
+              <TbColorFilter className="size-4" />
+            </Button>
+          </Hint>
         </div>
       )}
       <div className="flex h-full items-center justify-center">

@@ -27,9 +27,7 @@ import { useState } from "react";
 import { BsBorderWidth } from "react-icons/bs";
 import {
   FaBold,
-  FaCopy,
   FaItalic,
-  FaPaste,
   FaStrikethrough,
   FaUnderline,
 } from "react-icons/fa6";
@@ -373,22 +371,14 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
       <div className="flex h-full items-center justify-center">
         <Hint label="Copy" side="bottom" sideOffset={5}>
           <Button
-            onClick={() => editor?.onCopy()}
+            onClick={() => {
+              editor?.onCopy();
+              editor?.onPaste();
+            }}
             size="icon"
             variant={"ghost"}
           >
-            <FaCopy className="size-4" />
-          </Button>
-        </Hint>
-      </div>
-      <div className="flex h-full items-center justify-center">
-        <Hint label="Paste" side="bottom" sideOffset={5}>
-          <Button
-            onClick={() => editor?.onPaste()}
-            size="icon"
-            variant={"ghost"}
-          >
-            <FaPaste className="size-4" />
+            <CopyIcon className="size-4" />
           </Button>
         </Hint>
       </div>

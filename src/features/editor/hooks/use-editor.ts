@@ -55,6 +55,16 @@ const buildEditor = ({
   };
 
   return {
+    getActiveFilters: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) return [];
+
+      // @ts-expect-error Filters has no type definitions
+      const value = selectedObject.get("filters") || [];
+
+      return value as string[];
+    },
     changeImageFilter: (value: string) => {
       const objects = canvas.getActiveObjects();
 

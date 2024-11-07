@@ -1,8 +1,15 @@
+import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Slider } from "@/components/ui/slider";
 import ColorPicker from "@/features/editor/components/color-picker";
 import ToolSidebarClose from "@/features/editor/components/tool-sidebar-close";
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
-import { ActiveTool, Editor, STROKE_COLOR } from "@/features/editor/types";
+import {
+  ActiveTool,
+  Editor,
+  STROKE_COLOR,
+  STROKE_WIDTH,
+} from "@/features/editor/types";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -14,9 +21,11 @@ type Props = {
 const DrawSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
   const onClose = () => onChangeActiveTool("select");
 
-  const onChange = (value: string) => editor?.changeStrokeColor(value);
+  const colorValue = editor?.strokeColor ?? STROKE_COLOR;
+  const widthValue = editor?.strokeWidth ?? STROKE_WIDTH;
 
-  const value = editor?.strokeColor ?? STROKE_COLOR;
+  const onColorChange = (value: string) => editor?.changeStrokeColor(value);
+  const onWidthChange = (value: number) => editor?.changeStrokeWidth(value);
 
   return (
     <aside
@@ -30,8 +39,15 @@ const DrawSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
         description="Modify brush settings"
       />
       <ScrollArea>
+        <div className="space-y-6 border-b p-4">
+          <Label className="text-sm">Brush Width</Label>
+          <Slider
+            value={[widthValue]}
+            onValueChange={(values) => onWidthChange(values[0])}
+          />
+        </div>
         <div className="space-y-6 p-4">
-          <ColorPicker onChange={onChange} value={value} />
+          <ColorPicker onChange={onColorChange} value={colorValue} />
         </div>
       </ScrollArea>
       <ToolSidebarClose onClick={onClose} />

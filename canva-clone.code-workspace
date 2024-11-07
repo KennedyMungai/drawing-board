@@ -7,6 +7,7 @@
 	"settings": {
 		"cSpell.words": [
 			"canva",
+			"clientside",
 			"clsx",
 			"hono",
 			"linethrough",
@@ -20,6 +21,7 @@
 			"tanstack",
 			"textbox",
 			"turbopack",
+			"Uploadthing",
 			"Verdana"
 		]
 	}

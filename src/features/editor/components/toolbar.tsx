@@ -55,6 +55,7 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
   const selectedObject = editor?.selectedObjects[0];
 
   const isText = isTextType(selectedObjectType);
+  const isImage = selectedObjectType === "image";
 
   const [properties, setProperties] = useState({
     fontWeight: initialFontWeight,
@@ -140,23 +141,25 @@ const Toolbar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
 
   return (
     <div className="z-[49] flex h-[56px] w-full shrink-0 items-center gap-x-2 overflow-x-auto border-b bg-white p-2">
-      <div className="flex h-full items-center justify-center">
-        <Hint label="Color" side="bottom" sideOffset={5}>
-          <Button
-            onClick={() => onChangeActiveTool("fill")}
-            size="icon"
-            variant={"ghost"}
-            className={cn(activeTool === "fill" && "bg-gray-100")}
-          >
-            <div
-              className="size-4 rounded-sm border"
-              style={{
-                backgroundColor: properties.fillColor,
-              }}
-            />
-          </Button>
-        </Hint>
-      </div>
+      {!isImage && (
+        <div className="flex h-full items-center justify-center">
+          <Hint label="Color" side="bottom" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("fill")}
+              size="icon"
+              variant={"ghost"}
+              className={cn(activeTool === "fill" && "bg-gray-100")}
+            >
+              <div
+                className="size-4 rounded-sm border"
+                style={{
+                  backgroundColor: properties.fillColor,
+                }}
+              />
+            </Button>
+          </Hint>
+        </div>
+      )}
       {!isText && (
         <div className="flex h-full items-center justify-center">
           <Hint label="Stroke Color" side="bottom" sideOffset={5}>

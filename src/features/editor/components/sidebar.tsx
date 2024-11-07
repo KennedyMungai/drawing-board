@@ -4,8 +4,6 @@ import SidebarItem from "@/features/editor/components/sidebar-item";
 import {
   LayoutTemplateIcon,
   ImageIcon,
-  PencilIcon,
-  PresentationIcon,
   SettingsIcon,
   ShapesIcon,
   SparklesIcon,

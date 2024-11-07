@@ -36,11 +36,11 @@ const Editor = () => {
 
   const onChangeActiveTool = useCallback(
     (tool: ActiveTool) => {
-      if (tool === activeTool) return setActiveTool("select");
-
       if (tool === "draw") editor?.enableDrawingMode();
 
       if (activeTool === "draw") editor?.disableDrawingMode();
+
+      if (tool === activeTool) return setActiveTool("select");
 
       setActiveTool(tool);
     },

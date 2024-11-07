@@ -3,10 +3,12 @@ import ToolSidebarClose from "@/features/editor/components/tool-sidebar-close";
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
 import { ActiveTool, Editor } from "@/features/editor/types";
 import { useGetImages } from "@/features/images/api/use-get-images";
+import { UploadButton } from "@/lib/uploadthing";
 import { cn } from "@/lib/utils";
 import { LoaderIcon, TriangleAlertIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 
 type Props = {
   activeTool: ActiveTool;
@@ -34,6 +36,28 @@ const ImageSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
         title="Images"
         description="Add images to your canvas"
       />
+      <div className="border-b p-4">
+        <UploadButton
+          endpoint={"imageUploader"}
+          onUploadProgress={() => toast.loading("Uploading image...")}
+          onClientUploadComplete={(res) => {
+            editor?.addImage(res[0].url);
+            toast.dismiss();
+
+            toast.success("Image uploaded");
+          }}
+          onUploadError={(error: Error) => {
+            toast.error(`Failed to upload image: ${error.message}`);
+          }}
+          appearance={{
+            button: "w-full text-sm font-medium",
+            allowedContent: "hidden",
+          }}
+          content={{
+            button: "Upload Image",
+          }}
+        />
+      </div>
       {isLoadingImageData && (
         <div className="flex flex-1 items-center justify-center">
           <LoaderIcon className="size-5 animate-spin text-muted-foreground" />

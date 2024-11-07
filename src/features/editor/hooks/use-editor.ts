@@ -1,5 +1,6 @@
 import { useAutoResize } from "@/features/editor/hooks/use-auto-resize";
 import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
+import { useClipboard } from "@/features/editor/hooks/use-clipboard";
 import {
   BuildEditorProps,
   CIRCLE_OPTIONS,
@@ -432,6 +433,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [strokeWidth, setStrokeWidth] = useState(STROKE_WIDTH);
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
+
+  useClipboard({ canvas });
 
   useAutoResize({
     canvas,

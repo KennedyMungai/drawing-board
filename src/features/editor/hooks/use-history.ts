@@ -33,6 +33,7 @@ export const useHistory = ({ canvas }: Props) => {
       }
 
       // TODO: Save Callback
+      // TODO: Save to database
     },
     [canvas],
   );

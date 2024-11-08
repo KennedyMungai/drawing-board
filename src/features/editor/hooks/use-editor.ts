@@ -3,6 +3,7 @@ import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
 import { useClipboard } from "@/features/editor/hooks/use-clipboard";
 import { useHistory } from "@/features/editor/hooks/use-history";
 import { useHotkeys } from "@/features/editor/hooks/use-hotkeys";
+import { useWindowEvents } from "@/features/editor/hooks/use-window-events";
 import {
   BuildEditorProps,
   CIRCLE_OPTIONS,
@@ -593,6 +594,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   });
 
   useHotkeys({ canvas, undo, redo, copy, paste, save });
+
+  useWindowEvents();
 
   const editor = useMemo(() => {
     if (canvas)

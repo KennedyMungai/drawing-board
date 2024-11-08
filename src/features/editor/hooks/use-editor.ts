@@ -1,6 +1,7 @@
 import { useAutoResize } from "@/features/editor/hooks/use-auto-resize";
 import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
 import { useClipboard } from "@/features/editor/hooks/use-clipboard";
+import { useHistory } from "@/features/editor/hooks/use-history";
 import {
   BuildEditorProps,
   CIRCLE_OPTIONS,
@@ -24,6 +25,11 @@ import { useCallback, useMemo, useState } from "react";
 
 const buildEditor = ({
   autoZoom,
+  canRedo,
+  canUndo,
+  redo,
+  undo,
+  save,
   copy,
   paste,
   canvas,
@@ -81,6 +87,8 @@ const buildEditor = ({
     getWorkspace,
     onCopy: () => copy(),
     onPaste: () => paste(),
+    onUndo: () => undo(),
+    onRedo: () => redo(),
     changeSize: (value: { width: number; height: number }) => {
       const workspace = getWorkspace();
 
@@ -88,7 +96,7 @@ const buildEditor = ({
 
       autoZoom();
 
-      // TODO: Save
+      save();
     },
     changeBackground: (value: string) => {
       const workspace = getWorkspace();
@@ -97,7 +105,7 @@ const buildEditor = ({
 
       canvas.renderAll();
 
-      // TODO: Save
+      save();
     },
     enableDrawingMode: () => {
       canvas.discardActiveObject();
@@ -468,6 +476,8 @@ const buildEditor = ({
 
       return value as number;
     },
+    canUndo,
+    canRedo,
     canvas,
     fillColor,
     strokeColor,
@@ -491,6 +501,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
 
+  const { save, canRedo, canUndo, redo, undo } = useHistory({ canvas });
+
   const { copy, paste } = useClipboard({ canvas });
 
   const { autoZoom } = useAutoResize({
@@ -499,6 +511,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   });
 
   useCanvasEvents({
+    save,
     canvas,
     setSelectedObjects,
     clearSelectionCallback,
@@ -508,6 +521,11 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     if (canvas)
       return buildEditor({
         autoZoom,
+        canRedo,
+        canUndo,
+        save,
+        redo,
+        undo,
         copy,
         paste,
         canvas,
@@ -536,6 +554,11 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     autoZoom,
     copy,
     paste,
+    canRedo,
+    canUndo,
+    redo,
+    undo,
+    save,
   ]);
 
   const init = useCallback(

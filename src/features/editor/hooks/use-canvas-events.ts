@@ -2,12 +2,14 @@ import { fabric } from "fabric";
 import { useEffect } from "react";
 
 type Props = {
+  save: () => void;
   canvas: fabric.Canvas | null;
   setSelectedObjects: (objects: fabric.Object[]) => void;
   clearSelectionCallback?: () => void;
 };
 
 export const useCanvasEvents = ({
+  save,
   canvas,
   setSelectedObjects,
   clearSelectionCallback,
@@ -27,6 +29,10 @@ export const useCanvasEvents = ({
 
         clearSelectionCallback?.();
       });
+
+      canvas.on("object:added", () => save());
+      canvas.on("object:removed", () => save());
+      canvas.on("object:modified", () => save());
     }
 
     return () => {
@@ -34,9 +40,12 @@ export const useCanvasEvents = ({
         canvas.off("selection:created");
         canvas.off("selection:updated");
         canvas.off("selection:cleared");
+        canvas.off("object:added");
+        canvas.off("object:removed");
+        canvas.off("object:modified");
       }
     };
 
     // There is no need to put setSelectedObjects in the dependency array as it is a local state dispatcher
-  }, [canvas, setSelectedObjects, clearSelectionCallback]);
+  }, [canvas, setSelectedObjects, clearSelectionCallback, save]);
 };

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import Logo from "@/features/editor/components/logo";
-import { ActiveTool } from "@/features/editor/types";
+import { ActiveTool, Editor } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
 import {
   ChevronDownIcon,
@@ -23,11 +23,12 @@ import { BsCloudCheck } from "react-icons/bs";
 import { CiFileOn } from "react-icons/ci";
 
 type Props = {
+  editor?: Editor;
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
 };
 
-const Navbar = ({ activeTool, onChangeActiveTool }: Props) => {
+const Navbar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
   return (
     <nav className="flex h-[68px] w-full items-center gap-x-8 border-b p-4 lg:pl-[34px]">
       <Logo />
@@ -65,12 +66,22 @@ const Navbar = ({ activeTool, onChangeActiveTool }: Props) => {
           </Button>
         </Hint>
         <Hint label="Undo" side={"bottom"} sideOffset={10}>
-          <Button variant={"ghost"} size="icon" onClick={() => {}} className="">
+          <Button
+            disabled={!editor?.canUndo()}
+            variant={"ghost"}
+            size="icon"
+            onClick={() => editor?.onUndo()}
+          >
             <Undo2Icon className="size-4" />
           </Button>
         </Hint>
         <Hint label="Redo" side={"bottom"} sideOffset={10}>
-          <Button variant={"ghost"} size="icon" onClick={() => {}} className="">
+          <Button
+            variant={"ghost"}
+            size="icon"
+            onClick={() => editor?.onRedo()}
+            disabled={!editor?.canRedo()}
+          >
             <Redo2Icon className="size-4" />
           </Button>
         </Hint>
@@ -89,7 +100,7 @@ const Navbar = ({ activeTool, onChangeActiveTool }: Props) => {
             <DropdownMenuContent align="end" className="min-w-60">
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}} //TODO: Add functionality
+                onClick={() => {}}
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -101,7 +112,7 @@ const Navbar = ({ activeTool, onChangeActiveTool }: Props) => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}} //TODO: Add functionality
+                onClick={() => {}}
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -113,7 +124,7 @@ const Navbar = ({ activeTool, onChangeActiveTool }: Props) => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}} //TODO: Add functionality
+                onClick={() => {}}
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -125,7 +136,7 @@ const Navbar = ({ activeTool, onChangeActiveTool }: Props) => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}} //TODO: Add functionality
+                onClick={() => {}}
               >
                 <CiFileOn className="size-8" />
                 <div>

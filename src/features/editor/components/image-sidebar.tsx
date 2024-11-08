@@ -76,8 +76,6 @@ const ImageSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
           <div className="grid grid-cols-2 gap-4">
             {imageData?.data &&
               imageData?.data.map((image) => {
-                console.log(image.user.name);
-
                 return (
                   <button
                     key={image.id}

@@ -12,6 +12,7 @@ import {
   FONT_FAMILY,
   FONT_SIZE,
   FONT_WEIGHT,
+  JSON_KEYS,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -501,7 +502,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
 
-  const { save, canRedo, canUndo, redo, undo } = useHistory({ canvas });
+  const { save, canRedo, canUndo, redo, undo, canvasHistory, setHistoryIndex } =
+    useHistory({ canvas });
 
   const { copy, paste } = useClipboard({ canvas });
 
@@ -601,8 +603,13 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
 
       setCanvas(initialCanvas);
       setContainer(initialContainer);
+
+      const currentState = JSON.stringify(initialCanvas.toJSON(JSON_KEYS));
+      canvasHistory.current = [currentState];
+
+      setHistoryIndex(0);
     },
-    [],
+    [canvasHistory, setHistoryIndex],
   );
 
   return { init, editor };

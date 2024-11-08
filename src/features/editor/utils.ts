@@ -1,5 +1,6 @@
 import { RGBColor } from "react-color";
 import { fabric } from "fabric";
+import { uuid } from "uuidv4";
 
 export const isTextType = (type: string | undefined) =>
   type === "text" || type === "i-text" || type === "textbox";
@@ -112,3 +113,28 @@ export const createFilter = (value: string) => {
 
   return effect;
 };
+
+export const downloadFile = (file: string, type: string) => {
+  const anchorElement = document.createElement("a");
+
+  anchorElement.href = file;
+  anchorElement.download = `${uuid()}.${type}`;
+  document.body.appendChild(anchorElement);
+  anchorElement.click();
+  anchorElement.remove();
+};
+
+export const transformText = (objects: fabric.Object[]) => {
+  if (!objects) return;
+
+  objects.forEach((item: fabric.Object) => {
+    // @ts-expect-error objects is not defined in the data definitions
+    if (item.objects) {
+      // @ts-expect-error objects is not defined in the data definitions
+      transformText(item.objects);
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      item.type === "text" || item.type === "textbox";
+    }
+  });
+}; 

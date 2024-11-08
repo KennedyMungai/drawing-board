@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { BsCloudCheck } from "react-icons/bs";
 import { CiFileOn } from "react-icons/ci";
+import { useFilePicker } from "use-file-picker";
 
 type Props = {
   editor?: Editor;
@@ -29,6 +30,21 @@ type Props = {
 };
 
 const Navbar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
+  const { openFilePicker } = useFilePicker({
+    accept: ".json",
+    // @ts-expect-error Type 'unknown' is not assignable to type 'File'.
+    onFilesSuccessfullySelected: ({ plainFiles }: unknown) => {
+      if (plainFiles && plainFiles.length > 0) {
+        const file = plainFiles[0];
+        const reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = () => {
+          editor?.loadJson(reader.result as string);
+        };
+      }
+    },
+  });
+
   return (
     <nav className="flex h-[68px] w-full items-center gap-x-8 border-b p-4 lg:pl-[34px]">
       <Logo />
@@ -42,7 +58,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
           <DropdownMenuContent align="start" className="min-w-60">
             <DropdownMenuItem
               className="flex items-center gap-x-2"
-              onClick={() => {}}
+              onClick={() => openFilePicker()}
             >
               <CiFileOn className="size-8" />
               <div>

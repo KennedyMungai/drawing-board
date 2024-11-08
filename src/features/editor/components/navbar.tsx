@@ -42,7 +42,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
           <DropdownMenuContent align="start" className="min-w-60">
             <DropdownMenuItem
               className="flex items-center gap-x-2"
-              onClick={() => {}} //TODO: Add functionality
+              onClick={() => {}}
             >
               <CiFileOn className="size-8" />
               <div>
@@ -100,7 +100,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
             <DropdownMenuContent align="end" className="min-w-60">
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}}
+                onClick={() => editor?.saveJson()}
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -112,7 +112,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}}
+                onClick={() => editor?.savePng()}
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -124,7 +124,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}}
+                onClick={() => editor?.saveJpg()}
               >
                 <CiFileOn className="size-8" />
                 <div>
@@ -136,7 +136,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: Props) => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}}
+                onClick={() => editor?.saveSvg()}
               >
                 <CiFileOn className="size-8" />
                 <div>

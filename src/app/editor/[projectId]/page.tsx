@@ -1,3 +1,4 @@
+import { protectServer } from "@/features/auth/utils";
 import Editor from "@/features/editor/components/editor";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 };
 
 const ProjectPage = async ({ params }: Props) => {
-  const { projectId } = await params;
+  await protectServer();
 
   return <Editor />;
 };

@@ -6,13 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
-import { FaGithub } from "react-icons/fa6";
-import { FcGoogle } from "react-icons/fc";
 import {
   githubSigninAction,
   googleSigninAction,
 } from "@/features/auth/actions/auth-action";
+import Link from "next/link";
+import { FaGithub } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUpCard = () => {
   return (

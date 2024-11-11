@@ -33,7 +33,7 @@ const ProjectPage = () => {
         <span className="text-sm text-muted-foreground">
           Failed to fetch project
         </span>
-        <Button asChild>
+        <Button variant={"secondary"} asChild>
           <Link href="/">Back to Home</Link>
         </Button>
       </div>

@@ -10,7 +10,9 @@ type Props = {
 const ProjectPage = async ({ params }: Props) => {
   await protectServer();
 
-  return <Editor />;
+  const { projectId } = await params;
+
+  return <Editor projectId={projectId} />;
 };
 
 export default ProjectPage;

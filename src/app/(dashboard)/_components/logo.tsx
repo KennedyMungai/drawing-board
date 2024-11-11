@@ -10,7 +10,7 @@ const Logo = () => {
     <Link href="/">
       <div className="flex h-[68px] items-center gap-x-2 px-4 transition hover:opacity-75">
         <div className="relative size-8">
-          <Image src="/logo.png" alt="Logo" width={100} height={100} />
+          <Image src="/logo.png" alt="Logo" fill />
         </div>
         <h1 className={cn(font.className, "text-xl font-bold")}>Canva Clone</h1>
       </div>

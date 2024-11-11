@@ -11,7 +11,7 @@ export const runtime = "nodejs";
 
 const getAuthConfig = (): AuthConfig => {
   return {
-    secret: process.env.AUTH_SECRET,
+    secret: process.env.AUTH_SECRET!,
     ...authConfig,
   };
 };

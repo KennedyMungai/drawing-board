@@ -104,7 +104,7 @@ export const projects = pgTable("projects", {
   json: text("json").notNull(),
   height: integer("height").notNull(),
   width: integer("width").notNull(),
-  thumbnailUrl: text("thumbnailUrl").notNull(),
+  thumbnailUrl: text("thumbnailUrl"),
   isTemplate: boolean("isTemplate").notNull().default(false),
   isPro: boolean("isPro").notNull().default(false),
   createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
@@ -120,8 +120,4 @@ export const projectRelations = relations(projects, ({ one }) => ({
   }),
 }));
 
-export const insertProjectSchema = createInsertSchema(projects).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
+export const insertProjectSchema = createInsertSchema(projects);

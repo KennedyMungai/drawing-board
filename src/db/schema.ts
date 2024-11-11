@@ -9,7 +9,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
-import { createInsertSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const users = pgTable("user", {
   id: text("id")
@@ -118,3 +118,5 @@ export const projectRelations = relations(projects, ({ one }) => ({
 }));
 
 export const insertProjectSchema = createInsertSchema(projects);
+
+export const readProjectSchema = createSelectSchema(projects);

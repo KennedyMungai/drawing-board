@@ -1,15 +1,13 @@
 import authConfig from "@/auth.config";
 import ai from "@/features/ai/server/route";
 import images from "@/features/images/server/route";
+import projects from "@/features/projects/server/route";
 import { AuthConfig, initAuthConfig } from "@hono/auth-js";
-import { config } from "dotenv";
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 
 // Revert to edge if planning to run on the edge
 export const runtime = "nodejs";
-
-config({ path: ".env.local" });
 
 const getAuthConfig = (): AuthConfig => {
   return {
@@ -22,7 +20,8 @@ const app = new Hono()
   .basePath("/api")
   .use("*", initAuthConfig(getAuthConfig))
   .route("/images", images)
-  .route("/ai", ai);
+  .route("/ai", ai)
+  .route("/projects", projects);
 
 export const GET = handle(app);
 export const POST = handle(app);

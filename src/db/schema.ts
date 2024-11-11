@@ -22,9 +22,6 @@ export const users = pgTable("user", {
 });
 
 export const userRelations = relations(users, ({ many }) => ({
-  accounts: many(accounts),
-  sessions: many(sessions),
-  verificationTokens: many(verificationTokens),
   projects: many(projects),
 }));
 

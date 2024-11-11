@@ -40,7 +40,19 @@ const ProjectPage = () => {
     );
   }
 
-  return <Editor />;
+  const {} = projectData.data;
+
+  return (
+    <Editor
+      initialData={{
+        ...projectData.data,
+        createdAt: new Date(projectData.data.createdAt),
+        updatedAt: projectData.data.updatedAt
+          ? new Date(projectData.data.updatedAt)
+          : null,
+      }}
+    />
+  );
 };
 
 export default ProjectPage;

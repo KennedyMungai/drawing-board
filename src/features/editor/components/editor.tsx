@@ -1,5 +1,6 @@
 "use client";
 
+import { readProjectSchema } from "@/db/schema";
 import AiSidebar from "@/features/editor/components/ai-sidebar";
 import DrawSidebar from "@/features/editor/components/draw-sidebar";
 import FillColorSidebar from "@/features/editor/components/fill-color-sidebar";
@@ -20,8 +21,13 @@ import { useEditor } from "@/features/editor/hooks/use-editor";
 import { ActiveTool, selectionDependentTools } from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { z } from "zod";
 
-const Editor = () => {
+type Props = {
+  initialData: z.input<typeof readProjectSchema>;
+};
+
+const Editor = ({ initialData }: Props) => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
 
   const onClearSelection = useCallback(() => {

@@ -29,7 +29,7 @@ const app = new Hono().post(
         json,
         width,
         height,
-        userId: auth.user!.id,
+        userId: auth.token.id as string,
       })
       .returning();
 

@@ -33,6 +33,8 @@ const app = new Hono().post(
       })
       .returning();
 
+    if (!data) return c.json({ error: "Something went wrong" }, 400);
+
     return c.json({ data });
   },
 );

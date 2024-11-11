@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { insertProjectSchema, projects } from "@/db/schema";
 import { verifyAuth } from "@hono/auth-js";
 import { zValidator } from "@hono/zod-validator";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
 
@@ -20,7 +20,12 @@ const app = new Hono()
       const [data] = await db
         .select()
         .from(projects)
-        .where(eq(projects.id, projectId));
+        .where(
+          and(
+            eq(projects.id, projectId),
+            eq(projects.userId, auth.token.id as string),
+          ),
+        );
 
       return c.json({ data });
     },

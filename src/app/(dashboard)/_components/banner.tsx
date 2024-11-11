@@ -13,7 +13,7 @@ const Banner = () => {
         <h1 className="text-xl font-semibold lg:text-3xl">
           Visualize your ideas with Image AI
         </h1>
-        <p className="mb-2 hidden text-sm lg:block">
+        <p className="mb-2 text-xs lg:text-sm">
           Turn inspiration into design in no time.Simply upload an image and let
           AI do the rest.
         </p>

@@ -29,7 +29,7 @@ const ProjectPage = () => {
       <div className="flex h-full flex-col items-center justify-center gap-y-4">
         <TriangleAlertIcon className="size-6 text-muted-foreground" />
         <span className="text-sm text-muted-foreground">
-          Something went wrong
+          Failed to fetch project
         </span>
       </div>
     );

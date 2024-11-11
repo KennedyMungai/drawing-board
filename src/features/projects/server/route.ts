@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { insertProjectSchema, projects } from "@/db/schema";
+import { insertProjectSchema, projects, readProjectSchema } from "@/db/schema";
 import { verifyAuth } from "@hono/auth-js";
 import { zValidator } from "@hono/zod-validator";
 import { and, eq } from "drizzle-orm";
@@ -27,7 +27,7 @@ const app = new Hono()
           ),
         );
 
-        if (!data) return c.json({ error: "Project not found" }, 404);
+      if (!data) return c.json({ error: "Project not found" }, 404);
 
       return c.json({ data });
     },
@@ -62,6 +62,44 @@ const app = new Hono()
         .returning();
 
       if (!data) return c.json({ error: "Something went wrong" }, 400);
+
+      return c.json({ data });
+    },
+  )
+  .patch(
+    "/:projectId",
+    verifyAuth(),
+    zValidator("param", z.object({ projectId: z.string() })),
+    zValidator(
+      "json",
+      readProjectSchema
+        .omit({
+          id: true,
+          userId: true,
+          createdAt: true,
+          updatedAt: true,
+        })
+        .partial(),
+    ),
+    async (c) => {
+      const auth = c.get("authUser");
+      const { projectId } = c.req.valid("param");
+      const values = c.req.valid("json");
+
+      if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
+
+      const [data] = await db
+        .update(projects)
+        .set({ ...values })
+        .where(
+          and(
+            eq(projects.id, projectId),
+            eq(projects.userId, auth.token.id as string),
+          ),
+        )
+        .returning();
+
+      if (!data) return c.json({ error: "Unauthorized" }, 401);
 
       return c.json({ data });
     },

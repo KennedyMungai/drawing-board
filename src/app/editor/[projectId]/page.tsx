@@ -1,8 +1,10 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import Editor from "@/features/editor/components/editor";
 import { useGetProject } from "@/features/projects/api/use-get-project";
 import { LoaderIcon, TriangleAlertIcon } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const ProjectPage = () => {
@@ -31,6 +33,9 @@ const ProjectPage = () => {
         <span className="text-sm text-muted-foreground">
           Failed to fetch project
         </span>
+        <Button asChild>
+          <Link href="/">Back to Home</Link>
+        </Button>
       </div>
     );
   }

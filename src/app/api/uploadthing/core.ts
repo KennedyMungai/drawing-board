@@ -6,6 +6,7 @@ const f = createUploadthing();
 
 export const ourFileRouter = {
   imageUploader: f({ image: { maxFileSize: "4MB" } })
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .middleware(async ({ req }) => {
       const session = await auth();
 
@@ -13,6 +14,7 @@ export const ourFileRouter = {
 
       return { userId: session.user?.id };
     })
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .onUploadComplete(async ({ metadata, file }) => {
       return { url: file.url };
     }),

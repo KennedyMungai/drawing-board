@@ -9,6 +9,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
+import { createInsertSchema } from "drizzle-zod";
 
 export const users = pgTable("user", {
   id: text("id")
@@ -118,3 +119,9 @@ export const projectRelations = relations(projects, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export const insertProjectSchema = createInsertSchema(projects).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});

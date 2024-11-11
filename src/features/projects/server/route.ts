@@ -27,6 +27,8 @@ const app = new Hono()
           ),
         );
 
+        if (!data) return c.json({ error: "Project not found" }, 404);
+
       return c.json({ data });
     },
   )

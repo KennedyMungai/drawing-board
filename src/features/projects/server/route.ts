@@ -1,4 +1,5 @@
-import { insertProjectSchema } from "@/db/schema";
+import { db } from "@/db";
+import { insertProjectSchema, projects } from "@/db/schema";
 import { verifyAuth } from "@hono/auth-js";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
@@ -20,6 +21,19 @@ const app = new Hono().post(
     const { height, json, name, width } = c.req.valid("json");
 
     if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
+
+    const [data] = await db
+      .insert(projects)
+      .values({
+        name,
+        json,
+        width,
+        height,
+        userId: auth.user!.id,
+      })
+      .returning();
+
+    return c.json({ data });
   },
 );
 

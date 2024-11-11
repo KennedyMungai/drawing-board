@@ -3,7 +3,12 @@
 import SidebarItem from "@/app/(dashboard)/_components/sidebar-item";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { CrownIcon, HomeIcon } from "lucide-react";
+import {
+  CreditCardIcon,
+  CrownIcon,
+  HomeIcon,
+  MessageCircleQuestionIcon,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const SidebarRoutes = () => {
@@ -27,11 +32,24 @@ const SidebarRoutes = () => {
         <SidebarItem
           href="/"
           icon={HomeIcon}
-          label="Dashboard"
+          label="Home"
           isActive={pathname === "/"}
         />
       </ul>
       <Separator className="px-3" />
+      <ul className="flex flex-col gap-y-1 px-3">
+        <SidebarItem
+          href={pathname}
+          icon={CreditCardIcon}
+          label="Billing"
+          onClick={() => {}}
+        />
+        <SidebarItem
+          href={"mailto:kennedymungaifmab@gmail.com"}
+          icon={MessageCircleQuestionIcon}
+          label="Get Help"
+        />
+      </ul>
     </div>
   );
 };

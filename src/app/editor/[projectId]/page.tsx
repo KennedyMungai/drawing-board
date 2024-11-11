@@ -1,18 +1,38 @@
-import { protectServer } from "@/features/auth/utils";
+"use client";
+
 import Editor from "@/features/editor/components/editor";
+import { useGetProject } from "@/features/projects/api/use-get-project";
+import { LoaderIcon, TriangleAlertIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
-type Props = {
-  params: {
-    projectId: string;
-  };
-};
+const ProjectPage = () => {
+  const pathname = usePathname();
 
-const ProjectPage = async ({ params }: Props) => {
-  await protectServer();
+  const projectId = pathname.split("/")[2];
 
-  const { projectId } = await params;
+  const {
+    data: projectData,
+    isPending: isProjectLoading,
+    isError: isProjectError,
+  } = useGetProject(projectId);
 
-  return <Editor projectId={projectId} />;
+  if (isProjectLoading || !projectData) {
+    return (
+      <div className="flex h-full flex-col items-center justify-center">
+        <LoaderIcon className="size-6 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+
+  if (isProjectError) {
+    return (
+      <div className="flex h-full flex-col items-center justify-center gap-y-4">
+        <TriangleAlertIcon className="size-6 text-muted-foreground" />
+      </div>
+    );
+  }
+
+  return <Editor />;
 };
 
 export default ProjectPage;

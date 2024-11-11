@@ -21,11 +21,7 @@ import { ActiveTool, selectionDependentTools } from "@/features/editor/types";
 import { fabric } from "fabric";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type Props = {
-  projectId: string;
-};
-
-const Editor = ({ projectId }: Props) => {
+const Editor = () => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
 
   const onClearSelection = useCallback(() => {

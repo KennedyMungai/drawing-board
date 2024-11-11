@@ -12,7 +12,7 @@ const DashboardLayout = ({ children }: Props) => {
       <Sidebar />
       <div className="flex h-full flex-col lg:ml-[300px]">
         <Navbar />
-        <main className="flex-1 overflow-auto rounded-tl-2xl bg-white p-8">
+        <main className="flex-1 overflow-auto bg-white p-8 lg:rounded-tl-2xl">
           {children}
         </main>
       </div>

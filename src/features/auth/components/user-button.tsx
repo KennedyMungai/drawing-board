@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { CreditCardIcon, LoaderIcon, LogOutIcon } from "lucide-react";
@@ -25,9 +26,10 @@ const UserButton = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
+        {/* TODO: Add crown if the user is premium */}
         <Avatar className="size-10 cursor-pointer transition hover:opacity-75">
           <AvatarImage alt={name ?? ""} src={imageUrl ?? ""} />
-          <AvatarFallback className="bg-blue-500 font-medium text-white">
+          <AvatarFallback className="flex items-center justify-center bg-blue-500 font-medium text-white">
             {name?.charAt(0).toUpperCase() ?? "U"}
           </AvatarFallback>
         </Avatar>
@@ -37,6 +39,7 @@ const UserButton = () => {
           <CreditCardIcon className="mr-2 size-4" />
           Billing
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem
           className="h-10"
           disabled={false}

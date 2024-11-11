@@ -1,5 +1,6 @@
 import { colors } from "@/features/editor/types";
 import { rgbaObjectToString } from "@/features/editor/utils";
+import { useEffect, useState } from "react";
 import { ChromePicker, CirclePicker } from "react-color";
 
 type Props = {
@@ -8,6 +9,14 @@ type Props = {
 };
 
 const ColorPicker = ({ onChange, value }: Props) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (isMounted === false) return null;
+
   return (
     <div className="w-full space-y-4">
       <ChromePicker

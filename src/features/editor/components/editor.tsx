@@ -91,6 +91,7 @@ const Editor = ({ initialData }: Props) => {
   return (
     <div className="flex h-full flex-col">
       <Navbar
+        id={initialData.id}
         activeTool={activeTool}
         onChangeActiveTool={onChangeActiveTool}
         editor={editor}

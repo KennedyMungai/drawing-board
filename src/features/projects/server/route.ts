@@ -193,7 +193,10 @@ const app = new Hono()
             eq(projects.userId, auth.token.id as string),
           ),
         )
-        .returning();
+        .returning({
+          id: projects.id,
+          name: projects.name,
+        });
 
       if (!data) return c.json({ error: "Project not found" }, 404);
 

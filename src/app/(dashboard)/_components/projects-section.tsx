@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { useDeleteProject } from "@/features/projects/api/use-delete-project";
 import { useDuplicateProject } from "@/features/projects/api/use-duplicate-project";
 import { useGetProjects } from "@/features/projects/api/use-get-projects";
 import { formatDistanceToNow } from "date-fns";
@@ -26,6 +27,9 @@ import { Fragment } from "react";
 const ProjectsSection = () => {
   const { mutate: duplicateProject, isPending: duplicatingProject } =
     useDuplicateProject();
+
+  const { mutate: deleteProject, isPending: deletingProject } =
+    useDeleteProject();
 
   const router = useRouter();
 
@@ -128,8 +132,10 @@ const ProjectsSection = () => {
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           className="h-10 cursor-pointer"
-                          disabled={false}
-                          onClick={() => {}}
+                          disabled={deletingProject}
+                          onClick={() =>
+                            deleteProject({ param: { projectId: project.id } })
+                          }
                         >
                           <TrashIcon className="mr-2 size-5" />
                           Delete Item

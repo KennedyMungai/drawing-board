@@ -135,6 +135,17 @@ const ProjectsSection = () => {
           ))}
         </TableBody>
       </Table>
+      {hasNextPage && (
+        <div className="flex w-full items-center justify-center pt-4">
+          <Button
+            variant={"ghost"}
+            onClick={() => fetchNextPage()}
+            disabled={isFetchingNextPage}
+          >
+            Load More
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

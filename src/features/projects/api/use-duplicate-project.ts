@@ -11,7 +11,7 @@ type RequestType = InferRequestType<
   (typeof client.api.projects)[":projectId"]["duplicate"]["$post"]
 >;
 
-export const useDuplicateProject = (projectId: string) => {
+export const useDuplicateProject = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
@@ -27,6 +27,8 @@ export const useDuplicateProject = (projectId: string) => {
       return await response.json();
     },
     onSuccess: () => {
+      toast.success("Project successfully duplicated");
+
       queryClient.invalidateQueries({ queryKey: ["projects"] });
     },
     onError: () => toast.error("Failed to duplicate project"),

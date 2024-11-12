@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { useDuplicateProject } from "@/features/projects/api/use-duplicate-project";
 import { useGetProjects } from "@/features/projects/api/use-get-projects";
 import { formatDistanceToNow } from "date-fns";
 import {
@@ -23,6 +24,9 @@ import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 
 const ProjectsSection = () => {
+  const { mutate: duplicateProject, isPending: duplicatingProject } =
+    useDuplicateProject();
+
   const router = useRouter();
 
   const {
@@ -112,8 +116,12 @@ const ProjectsSection = () => {
                       <DropdownMenuContent align="end" className="w-60">
                         <DropdownMenuItem
                           className="h-10 cursor-pointer"
-                          disabled={false}
-                          onClick={() => {}}
+                          disabled={duplicatingProject}
+                          onClick={() =>
+                            duplicateProject({
+                              param: { projectId: project.id },
+                            })
+                          }
                         >
                           <CopyIcon className="mr-2 size-5" />
                           Make a copy

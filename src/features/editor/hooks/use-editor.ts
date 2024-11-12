@@ -3,6 +3,7 @@ import { useCanvasEvents } from "@/features/editor/hooks/use-canvas-events";
 import { useClipboard } from "@/features/editor/hooks/use-clipboard";
 import { useHistory } from "@/features/editor/hooks/use-history";
 import { useHotkeys } from "@/features/editor/hooks/use-hotkeys";
+import { useLoadState } from "@/features/editor/hooks/use-load-state";
 import { useWindowEvents } from "@/features/editor/hooks/use-window-events";
 import {
   BuildEditorProps,
@@ -606,6 +607,14 @@ export const useEditor = ({
   useHotkeys({ canvas, undo, redo, copy, paste, save });
 
   useWindowEvents();
+
+  useLoadState({
+    canvas,
+    autoZoom,
+    initialState,
+    canvasHistory,
+    setHistoryIndex,
+  });
 
   const editor = useMemo(() => {
     if (canvas)

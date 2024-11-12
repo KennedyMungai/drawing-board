@@ -21,7 +21,7 @@ const ProjectPage = () => {
   if (isProjectLoading || !projectData) {
     return (
       <div className="flex h-full flex-col items-center justify-center">
-        <LoaderIcon className="size-6 animate-spin text-muted-foreground" />
+        <LoaderIcon className="size-5 animate-spin text-muted-foreground" />
       </div>
     );
   }

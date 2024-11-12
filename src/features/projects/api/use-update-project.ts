@@ -29,7 +29,7 @@ export const useUpdateProject = (projectId: string) => {
       return await response.json();
     },
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["projects"] });
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
       queryClient.invalidateQueries({ queryKey: ["project", { projectId }] });
     },
     onError: () => toast.error("Failed to update project"),

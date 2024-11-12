@@ -36,8 +36,8 @@ type Props = {
 const Navbar = ({ activeTool, onChangeActiveTool, editor, id }: Props) => {
   const data = useMutationState({
     filters: {
-      mutationKey: ["project", { id }],
-      // exact: true,
+      mutationKey: ["edit-project", { id }],
+      exact: true,
     },
     select: (mutation) => mutation.state.status,
   });

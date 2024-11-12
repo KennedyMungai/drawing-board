@@ -4,9 +4,14 @@ import { JSON_KEYS } from "@/features/editor/types";
 
 type Props = {
   canvas: fabric.Canvas | null;
+  saveCallback: (value: {
+    json: string;
+    height: number;
+    width: number;
+  }) => void;
 };
 
-export const useHistory = ({ canvas }: Props) => {
+export const useHistory = ({ canvas, saveCallback }: Props) => {
   const [historyIndex, setHistoryIndex] = useState(0);
 
   const canvasHistory = useRef<string[]>([]);
@@ -32,10 +37,16 @@ export const useHistory = ({ canvas }: Props) => {
         setHistoryIndex(canvasHistory.current.length - 1);
       }
 
-      // TODO: Save Callback
-      // TODO: Save to database
+      const workspace = canvas
+        .getObjects()
+        .find((object) => object.name === "clip");
+
+      const height = workspace?.height || 0;
+      const width = workspace?.width || 0;
+
+      saveCallback?.({ json, height, width });
     },
-    [canvas],
+    [canvas, saveCallback],
   );
 
   const undo = useCallback(() => {

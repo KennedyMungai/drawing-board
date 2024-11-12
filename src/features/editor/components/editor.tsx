@@ -19,6 +19,7 @@ import TextSidebar from "@/features/editor/components/text-sidebar";
 import Toolbar from "@/features/editor/components/toolbar";
 import { useEditor } from "@/features/editor/hooks/use-editor";
 import { ActiveTool, selectionDependentTools } from "@/features/editor/types";
+import { useUpdateProject } from "@/features/projects/api/use-update-project";
 import { fabric } from "fabric";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { z } from "zod";
@@ -30,6 +31,21 @@ type Props = {
 const Editor = ({ initialData }: Props) => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
 
+  const {
+    mutate: updateProject,
+    isPending: isUpdatingProject,
+    isError: isUpdatingProjectError,
+  } = useUpdateProject(initialData.id);
+
+  const debouncedSave = useCallback(
+    (values: { json: string; height: number; width: number }) => {
+      // TODO: Add debounce
+
+      updateProject({ param: { projectId: initialData.id }, json: values });
+    },
+    [updateProject, initialData.id],
+  );
+
   const onClearSelection = useCallback(() => {
     if (selectionDependentTools.includes(activeTool)) {
       setActiveTool("select");
@@ -37,7 +53,11 @@ const Editor = ({ initialData }: Props) => {
   }, [activeTool]);
 
   const { init, editor } = useEditor({
+    defaultState: initialData.json,
+    defaultWidth: initialData.width,
+    defaultHeight: initialData.height,
     clearSelectionCallback: onClearSelection,
+    saveCallback: debouncedSave,
   });
   const canvasRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);

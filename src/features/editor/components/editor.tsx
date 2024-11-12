@@ -23,6 +23,7 @@ import { useUpdateProject } from "@/features/projects/api/use-update-project";
 import { fabric } from "fabric";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { z } from "zod";
+import debounce from "lodash.debounce";
 
 type Props = {
   initialData: z.input<typeof readProjectSchema>;
@@ -37,12 +38,11 @@ const Editor = ({ initialData }: Props) => {
     isError: isUpdatingProjectError,
   } = useUpdateProject(initialData.id);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSave = useCallback(
-    (values: { json: string; height: number; width: number }) => {
-      // TODO: Add debounce
-
+    debounce((values: { json: string; height: number; width: number }) => {
       updateProject({ param: { projectId: initialData.id }, json: values });
-    },
+    }, 500),
     [updateProject, initialData.id],
   );
 

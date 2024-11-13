@@ -15,15 +15,16 @@ import ShapeSidebar from "@/features/editor/components/shape-sidebar";
 import Sidebar from "@/features/editor/components/sidebar";
 import StrokeColorSidebar from "@/features/editor/components/stroke-color-sidebar";
 import StrokeWidthSidebar from "@/features/editor/components/stroke-width-sidebar";
+import TemplateSidebar from "@/features/editor/components/template-sidebar";
 import TextSidebar from "@/features/editor/components/text-sidebar";
 import Toolbar from "@/features/editor/components/toolbar";
 import { useEditor } from "@/features/editor/hooks/use-editor";
 import { ActiveTool, selectionDependentTools } from "@/features/editor/types";
 import { useUpdateProject } from "@/features/projects/api/use-update-project";
 import { fabric } from "fabric";
+import debounce from "lodash.debounce";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { z } from "zod";
-import debounce from "lodash.debounce";
 
 type Props = {
   initialData: z.input<typeof readProjectSchema>;
@@ -158,6 +159,10 @@ const Editor = ({ initialData }: Props) => {
         />
         <SettingsSidebar
           editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <TemplateSidebar
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />

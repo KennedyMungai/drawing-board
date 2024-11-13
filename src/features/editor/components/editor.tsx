@@ -15,7 +15,6 @@ import ShapeSidebar from "@/features/editor/components/shape-sidebar";
 import Sidebar from "@/features/editor/components/sidebar";
 import StrokeColorSidebar from "@/features/editor/components/stroke-color-sidebar";
 import StrokeWidthSidebar from "@/features/editor/components/stroke-width-sidebar";
-import TemplateSidebar from "@/features/editor/components/template-sidebar";
 import TextSidebar from "@/features/editor/components/text-sidebar";
 import Toolbar from "@/features/editor/components/toolbar";
 import { useEditor } from "@/features/editor/hooks/use-editor";
@@ -158,11 +157,11 @@ const Editor = ({ initialData }: Props) => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
-        <TemplateSidebar
+        {/* <TemplateSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
-        />
+        /> */}
         <main className="relative flex flex-1 flex-col overflow-auto bg-muted">
           <Toolbar
             editor={editor}

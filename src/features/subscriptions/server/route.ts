@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { subscriptions } from "@/db/schema";
 import { stripe } from "@/lib/stripe";
 import { verifyAuth } from "@hono/auth-js";
+import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import Stripe from "stripe";
 
@@ -71,9 +72,25 @@ const app = new Hono()
         priceId: subscription.items.data[0].price.product as string,
         currentPeriodEnd: new Date(subscription.current_period_end * 1000),
       });
-
-      return c.json(null, 200);
     }
+    if (event.type === "invoice.payment_succeeded") {
+      const subscription = await stripe.subscriptions.retrieve(
+        session.subscription as string,
+      );
+
+      if (!session?.metadata?.userId)
+        return c.json({ error: "Invalid session" }, 400);
+
+      await db
+        .update(subscriptions)
+        .set({
+          status: subscription.status,
+          currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        })
+        .where(eq(subscriptions.id, subscription.id));
+    }
+
+    return c.json(null, 200);
   });
 
 export default app;

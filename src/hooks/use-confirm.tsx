@@ -23,7 +23,7 @@ const useConfirm = ({
   } | null>(null);
 
   const confirm = () =>
-    new Promise((resolve) => {
+    new Promise((resolve, reject) => {
       setPromise({ resolve });
     });
 

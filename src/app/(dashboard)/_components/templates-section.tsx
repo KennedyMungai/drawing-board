@@ -33,11 +33,8 @@ const TemplatesSection = () => {
     limit: "4",
   });
 
-  const {
-    mutate: createProject,
-    isPending: isCreatingProject,
-    isError: isProjectError,
-  } = useCreateProject();
+  const { mutate: createProject, isPending: isCreatingProject } =
+    useCreateProject();
 
   if (isLoadingTemplates) {
     return (

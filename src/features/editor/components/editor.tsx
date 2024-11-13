@@ -159,6 +159,7 @@ const Editor = ({ initialData }: Props) => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <TemplateSidebar
+          editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />

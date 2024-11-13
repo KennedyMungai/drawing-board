@@ -6,7 +6,7 @@ import { useGetTemplates } from "@/features/projects/api/use-get-templates";
 import { LoaderIcon, TriangleAlertIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-type TemplateType = {
+export type TemplateType = {
   json: string;
   id: string;
   name: string;

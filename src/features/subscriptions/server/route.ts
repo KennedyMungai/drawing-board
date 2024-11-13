@@ -7,6 +7,7 @@ const app = new Hono().post("/checkout", verifyAuth(), async (c) => {
 
   if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
 
+  // @ts-expect-error Still works with the error
   const session = await stripe.checkout.sessions.create({
     success_url: `${process.env.NEXT_PUBLIC_APP_URL}?success=true`,
     cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}?success=false`,

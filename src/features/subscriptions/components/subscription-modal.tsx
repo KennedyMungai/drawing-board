@@ -10,12 +10,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { useCheckout } from "@/features/subscriptions/api/use-checkout";
 import { useSubscriptionModal } from "@/features/subscriptions/store/use-subscription-modal";
 import { CheckCircle2Icon } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const SubscriptionModal = () => {
+  const { mutate: checkout, isPending: isCheckoutPending } = useCheckout();
+
   const { isOpen, onClose } = useSubscriptionModal();
 
   const [isMounted, setIsMounted] = useState(false);
@@ -54,7 +57,11 @@ const SubscriptionModal = () => {
           </li>
         </ul>
         <DialogFooter className="mt-4 space-y-2 pt-2">
-          <Button className="w-full" onClick={() => {}} disabled={false}>
+          <Button
+            className="w-full"
+            onClick={() => checkout()}
+            disabled={isCheckoutPending}
+          >
             Upgrade
           </Button>
         </DialogFooter>

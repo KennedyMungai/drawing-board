@@ -17,6 +17,6 @@ export const useCheckout = () =>
 
       return await response.json();
     },
-    onSuccess: ({ data }) => (window.location.href = "/checkout"),
+    onSuccess: ({ data }) => (window.location.href = data),
     onError: () => toast.error("Failed to create session"),
   });

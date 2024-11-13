@@ -8,8 +8,8 @@ const app = new Hono().post("/checkout", verifyAuth(), async (c) => {
   if (!auth.token?.id) return c.json({ error: "Unauthorized" }, 401);
 
   const session = await stripe.checkout.sessions.create({
-    success_url: "http://localhost:3000?success=true",
-    cancel_url: "http://localhost:3000?canceled=true",
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/?success=true`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/success=false`,
     payment_method_types: ["card", "paypal"],
     mode: "subscription",
     billing_address_collection: "auto",

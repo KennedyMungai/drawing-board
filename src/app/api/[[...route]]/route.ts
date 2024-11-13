@@ -2,6 +2,7 @@ import authConfig from "@/auth.config";
 import ai from "@/features/ai/server/route";
 import images from "@/features/images/server/route";
 import projects from "@/features/projects/server/route";
+import subscriptions from "@/features/subscriptions/server/route";
 import { AuthConfig, initAuthConfig } from "@hono/auth-js";
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
@@ -21,7 +22,8 @@ const app = new Hono()
   .use("*", initAuthConfig(getAuthConfig))
   .route("/images", images)
   .route("/ai", ai)
-  .route("/projects", projects);
+  .route("/projects", projects)
+  .route("/subscriptions", subscriptions);
 
 export const GET = handle(app);
 export const POST = handle(app);

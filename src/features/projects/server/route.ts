@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { insertProjectSchema, projects, readProjectSchema } from "@/db/schema";
 import { verifyAuth } from "@hono/auth-js";
 import { zValidator } from "@hono/zod-validator";
-import { and, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
 
@@ -55,6 +55,29 @@ const app = new Hono()
         );
 
       if (!data) return c.json({ error: "Project not found" }, 404);
+
+      return c.json({ data });
+    },
+  )
+  .get(
+    "/templates",
+    verifyAuth(),
+    zValidator(
+      "query",
+      z.object({ page: z.coerce.number(), limit: z.coerce.number() }),
+    ),
+    async (c) => {
+      const { page, limit } = c.req.valid("query");
+
+      // Not checking if the auth.token.id is null as the verifyAuth middleware is sufficient
+      // and the templates being loaded is not user specific
+      const [data] = await db
+        .select()
+        .from(projects)
+        .where(eq(projects.isTemplate, true))
+        .limit(limit)
+        .offset((page - 1) * limit)
+        .orderBy(asc(projects.isPro), desc(projects.updatedAt));
 
       return c.json({ data });
     },

@@ -33,11 +33,7 @@ type Props = {
 const Editor = ({ initialData }: Props) => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
 
-  const {
-    mutate: updateProject,
-    isPending: isUpdatingProject,
-    isError: isUpdatingProjectError,
-  } = useUpdateProject(initialData.id);
+  const { mutate: updateProject } = useUpdateProject(initialData.id);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSave = useCallback(

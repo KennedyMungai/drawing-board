@@ -3,6 +3,7 @@
 import TemplateCard from "@/app/(dashboard)/_components/template-card";
 import { useCreateProject } from "@/features/projects/api/use-create-project";
 import { useGetTemplates } from "@/features/projects/api/use-get-templates";
+import { usePaywall } from "@/features/subscriptions/hooks/use-paywall";
 import { LoaderIcon, TriangleAlertIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -22,6 +23,8 @@ export type TemplateType = {
 
 const TemplatesSection = () => {
   const router = useRouter();
+
+  const { shouldBlock, triggerPaywall } = usePaywall();
 
   const {
     data: templates,
@@ -64,6 +67,12 @@ const TemplatesSection = () => {
   }
 
   const onClick = (template: TemplateType) => {
+    if (template.isPro && shouldBlock) {
+      triggerPaywall();
+
+      return;
+    }
+
     createProject(
       {
         json: {

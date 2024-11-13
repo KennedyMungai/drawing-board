@@ -4,9 +4,10 @@ import ToolSidebarClose from "@/features/editor/components/tool-sidebar-close";
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
 import { ActiveTool, Editor } from "@/features/editor/types";
 import { useGetTemplates } from "@/features/projects/api/use-get-templates";
+import { usePaywall } from "@/features/subscriptions/hooks/use-paywall";
 import useConfirm from "@/hooks/use-confirm";
 import { cn } from "@/lib/utils";
-import { LoaderIcon, TriangleAlertIcon } from "lucide-react";
+import { CrownIcon, LoaderIcon, TriangleAlertIcon } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -16,6 +17,8 @@ type Props = {
 };
 
 const TemplateSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
+  const { shouldBlock, triggerPaywall } = usePaywall();
+
   const [ConfirmDialog, confirm] = useConfirm({
     title: "Load template",
     message: "You are about to replace the current project with the template",
@@ -30,7 +33,11 @@ const TemplateSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
   const onClose = () => onChangeActiveTool("select");
 
   const onClick = async (template: TemplateType) => {
-    // TODO: Check if the template is pro
+    if (template.isPro && shouldBlock) {
+      triggerPaywall();
+
+      return;
+    }
 
     const ok = await confirm();
 
@@ -83,6 +90,11 @@ const TemplateSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
                         alt={template.name}
                         className="object-cover"
                       />
+                      {template.isPro && (
+                        <div className="absolute right-2 top-2 z-10 flex size-8 items-center justify-center rounded-full bg-black/50">
+                          <CrownIcon className="size-4 fill-yellow-500 text-yellow-500" />
+                        </div>
+                      )}
                       <div className="absolute bottom-0 left-0 z-10 w-full truncate bg-black/50 p-1 text-left text-[10px] text-white opacity-0 transition group-hover:opacity-100">
                         {template.name}
                       </div>

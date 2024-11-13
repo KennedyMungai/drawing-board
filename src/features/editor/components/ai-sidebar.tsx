@@ -5,6 +5,7 @@ import { useGenerateImage } from "@/features/ai/api/use-generate-image";
 import ToolSidebarClose from "@/features/editor/components/tool-sidebar-close";
 import ToolSidebarHeader from "@/features/editor/components/tool-sidebar-header";
 import { ActiveTool, Editor } from "@/features/editor/types";
+import { usePaywall } from "@/features/subscriptions/hooks/use-paywall";
 import { cn } from "@/lib/utils";
 import { FormEvent, useState } from "react";
 
@@ -15,6 +16,8 @@ type Props = {
 };
 
 const AiSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
+  const { shouldBlock, triggerPaywall } = usePaywall();
+
   const onClose = () => onChangeActiveTool("select");
 
   const [value, setValue] = useState("");
@@ -24,7 +27,11 @@ const AiSidebar = ({ activeTool, editor, onChangeActiveTool }: Props) => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // TODO: Block with paywall
+    if (shouldBlock) {
+      triggerPaywall();
+
+      return;
+    }
 
     mutateAsync({ json: { prompt: "" } }).then(() => {
       setValue("");

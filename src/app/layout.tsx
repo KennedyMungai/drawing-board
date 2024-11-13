@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
+import ModalsProvider from "@/providers/modals-provider";
 import QueryProvider from "@/providers/query-provider";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
@@ -38,6 +39,7 @@ export default async function RootLayout({
           <QueryProvider>
             {children}
             <Toaster />
+            <ModalsProvider />
           </QueryProvider>
         </body>
       </html>

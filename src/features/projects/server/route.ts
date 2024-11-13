@@ -71,7 +71,7 @@ const app = new Hono()
 
       // Not checking if the auth.token.id is null as the verifyAuth middleware is sufficient
       // and the templates being loaded is not user specific
-      const [data] = await db
+      const data = await db
         .select()
         .from(projects)
         .where(eq(projects.isTemplate, true))

@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
+import SubscriptionAlert from "@/features/subscriptions/components/subscription-alert";
 import ModalsProvider from "@/providers/modals-provider";
 import QueryProvider from "@/providers/query-provider";
 import type { Metadata } from "next";
@@ -40,6 +41,7 @@ export default async function RootLayout({
             {children}
             <Toaster />
             <ModalsProvider />
+            <SubscriptionAlert />
           </QueryProvider>
         </body>
       </html>

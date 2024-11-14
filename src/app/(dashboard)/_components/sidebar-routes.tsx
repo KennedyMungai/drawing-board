@@ -3,6 +3,7 @@
 import SidebarItem from "@/app/(dashboard)/_components/sidebar-item";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { usePaywall } from "@/features/subscriptions/hooks/use-paywall";
 import {
   CreditCardIcon,
   CrownIcon,
@@ -14,11 +15,13 @@ import { usePathname } from "next/navigation";
 const SidebarRoutes = () => {
   const pathname = usePathname();
 
+  const { triggerPaywall } = usePaywall();
+
   return (
     <div className="flex flex-1 flex-col gap-y-4">
       <div className="px-4">
         <Button
-          onClick={() => {}}
+          onClick={triggerPaywall}
           className="w-full rounded-xl border-none transition hover:bg-white hover:opacity-75"
           variant={"outline"}
           size="lg"

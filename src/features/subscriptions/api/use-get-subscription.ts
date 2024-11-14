@@ -1,8 +1,14 @@
 import { client } from "@/lib/hc";
 import { useQuery } from "@tanstack/react-query";
+import { InferResponseType } from "hono";
+
+type ResponseType = InferResponseType<
+  typeof client.api.subscriptions.current.$get,
+  200
+>;
 
 export const useGetSubscription = () =>
-  useQuery({
+  useQuery<ResponseType, Error>({
     queryKey: ["subscription"],
     queryFn: async () => {
       const response = await client.api.subscriptions.current.$get();

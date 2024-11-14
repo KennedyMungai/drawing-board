@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useBilling } from "@/features/subscriptions/api/use-billing";
 import { usePaywall } from "@/features/subscriptions/hooks/use-paywall";
 import {
   CreditCardIcon,
@@ -17,14 +18,13 @@ import {
 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { signOutAction } from "../actions/auth-action";
-import { useBilling } from "@/features/subscriptions/api/use-billing";
 
 const UserButton = () => {
   const session = useSession();
 
   const { shouldBlock, isLoading, triggerPaywall } = usePaywall();
 
-  const { mutate: bill, isLoading: isLoadingBilling } = useBilling();
+  const { mutate: bill, isPending: isLoadingBilling } = useBilling();
 
   if (session.status === "loading")
     return <LoaderIcon className="size-5 animate-spin text-muted-foreground" />;

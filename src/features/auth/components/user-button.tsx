@@ -21,7 +21,7 @@ import { signOutAction } from "../actions/auth-action";
 const UserButton = () => {
   const session = useSession();
 
-  const { shouldBlock, triggerPaywall, isLoading } = usePaywall();
+  const { shouldBlock, isLoading } = usePaywall();
 
   if (session.status === "loading")
     return <LoaderIcon className="size-5 animate-spin text-muted-foreground" />;

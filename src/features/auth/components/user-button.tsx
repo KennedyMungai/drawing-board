@@ -8,12 +8,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CreditCardIcon, LoaderIcon, LogOutIcon } from "lucide-react";
+import { usePaywall } from "@/features/subscriptions/hooks/use-paywall";
+import {
+  CreditCardIcon,
+  CrownIcon,
+  LoaderIcon,
+  LogOutIcon,
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 import { signOutAction } from "../actions/auth-action";
 
 const UserButton = () => {
   const session = useSession();
+
+  const { shouldBlock, triggerPaywall, isLoading } = usePaywall();
 
   if (session.status === "loading")
     return <LoaderIcon className="size-5 animate-spin text-muted-foreground" />;
@@ -25,9 +33,15 @@ const UserButton = () => {
 
   return (
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger asChild>
-        {/* TODO: Add crown if the user is premium */}
+      <DropdownMenuTrigger asChild className="relative outline-none">
         <Avatar className="size-10 cursor-pointer transition hover:opacity-75">
+          {!shouldBlock && !isLoading && (
+            <div className="absolute -left-1 -top-1 z-10 flex items-center justify-center">
+              <div className="flex items-center justify-center rounded-full bg-white p-1 drop-shadow-sm">
+                <CrownIcon className="size-3 fill-yellow-500 text-yellow-500" />
+              </div>
+            </div>
+          )}
           <AvatarImage alt={name ?? ""} src={imageUrl ?? ""} />
           <AvatarFallback className="flex items-center justify-center bg-blue-500 font-medium text-white">
             {name?.charAt(0).toUpperCase() ?? "U"}

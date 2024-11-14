@@ -1,5 +1,6 @@
 "use client";
 
+import FailModal from "@/features/subscriptions/components/fail-modal";
 import SubscriptionModal from "@/features/subscriptions/components/subscription-modal";
 import { useEffect, useState } from "react";
 
@@ -13,6 +14,7 @@ const ModalsProvider = () => {
   return (
     <>
       <SubscriptionModal />
+      <FailModal />
     </>
   );
 };

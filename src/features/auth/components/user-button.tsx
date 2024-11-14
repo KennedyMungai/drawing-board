@@ -36,7 +36,7 @@ const UserButton = () => {
       <DropdownMenuTrigger asChild className="relative outline-none">
         <Avatar className="size-10 cursor-pointer transition hover:opacity-75">
           {!shouldBlock && !isLoading && (
-            <div className="absolute -left-1 -top-1 z-10 flex items-center justify-center">
+            <div className="absolute left-2.5 top-2.5 z-10 flex items-center justify-center">
               <div className="flex items-center justify-center rounded-full bg-white p-1 drop-shadow-sm">
                 <CrownIcon className="size-3 fill-yellow-500 text-yellow-500" />
               </div>

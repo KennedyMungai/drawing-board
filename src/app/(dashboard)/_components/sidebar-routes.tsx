@@ -3,6 +3,7 @@
 import SidebarItem from "@/app/(dashboard)/_components/sidebar-item";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useBilling } from "@/features/subscriptions/api/use-billing";
 import { useCheckout } from "@/features/subscriptions/api/use-checkout";
 import { usePaywall } from "@/features/subscriptions/hooks/use-paywall";
 import {
@@ -18,7 +19,19 @@ const SidebarRoutes = () => {
 
   const { mutate: checkout, isPending: isCheckoutPending } = useCheckout();
 
-  const { shouldBlock, isLoading } = usePaywall();
+  const { mutate: bill } = useBilling();
+
+  const { shouldBlock, isLoading, triggerPaywall } = usePaywall();
+
+  const onClick = () => {
+    if (shouldBlock) {
+      triggerPaywall();
+
+      return;
+    }
+
+    bill();
+  };
 
   return (
     <div className="flex flex-1 flex-col gap-y-4">
@@ -54,7 +67,7 @@ const SidebarRoutes = () => {
           href={pathname}
           icon={CreditCardIcon}
           label="Billing"
-          onClick={() => {}}
+          onClick={onClick}
         />
         <SidebarItem
           href={"mailto:kennedymungaifmab@gmail.com"}

@@ -17,16 +17,29 @@ import {
 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { signOutAction } from "../actions/auth-action";
+import { useBilling } from "@/features/subscriptions/api/use-billing";
 
 const UserButton = () => {
   const session = useSession();
 
-  const { shouldBlock, isLoading } = usePaywall();
+  const { shouldBlock, isLoading, triggerPaywall } = usePaywall();
+
+  const { mutate: bill, isLoading: isLoadingBilling } = useBilling();
 
   if (session.status === "loading")
     return <LoaderIcon className="size-5 animate-spin text-muted-foreground" />;
 
   if (session.status === "unauthenticated" || !session.data) return null;
+
+  const onClick = () => {
+    if (shouldBlock) {
+      triggerPaywall();
+
+      return;
+    }
+
+    bill();
+  };
 
   const name = session.data?.user?.name;
   const imageUrl = session.data?.user?.image;
@@ -49,7 +62,11 @@ const UserButton = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60">
-        <DropdownMenuItem className="h-10" disabled={false} onClick={() => {}}>
+        <DropdownMenuItem
+          className="h-10"
+          disabled={isLoadingBilling}
+          onClick={onClick}
+        >
           <CreditCardIcon className="mr-2 size-4" />
           Billing
         </DropdownMenuItem>

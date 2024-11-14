@@ -588,6 +588,7 @@ export const useEditor = ({
     useState<number[]>(STROKE_DASH_ARRAY);
 
   const { save, canRedo, canUndo, redo, undo, canvasHistory, setHistoryIndex } =
+    // @ts-expect-error saveCallback might be undefined
     useHistory({ canvas, saveCallback });
 
   const { copy, paste } = useClipboard({ canvas });
